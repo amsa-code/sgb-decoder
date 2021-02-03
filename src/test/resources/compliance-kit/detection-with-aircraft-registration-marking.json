@@ -1,0 +1,57 @@
+{
+  "tac" : 230,
+  "serialNo" : 573,
+  "countryCode" : 201,
+  "hasAtLeastOneEnabledHomingSignal" : true,
+  "hasEnabledRls" : false,
+  "testProtocolMessage" : false,
+  "encodedGnssPosition" : {
+    "lat" : 48.79315185546875,
+    "lon" : 69.00875854492188
+  },
+  "vesselId" : {
+    "vesselIdType" : "AIRCRAFT_REGISTRATION_MARKING",
+    "value" : "VH-ABC"
+  },
+  "beaconType" : "ELT_NOT_DT",
+  "rotatingField" : {
+    "rotatingFieldType" : "OBJECTIVE_REQUIREMENTS",
+    "elapsedTimeSinceActivationHours" : 1,
+    "timeSinceLastEncodedLocationMinutes" : 6,
+    "altitudeEncodedLocationMetres" : 432,
+    "dilutionPrecisionHdop" : {
+      "min" : {
+        "value" : 0,
+        "exclusive" : false
+      },
+      "max" : {
+        "value" : 1,
+        "exclusive" : false
+      }
+    },
+    "dilutionPrecisionVdop" : {
+      "min" : {
+        "value" : 1,
+        "exclusive" : true
+      },
+      "max" : {
+        "value" : 2,
+        "exclusive" : false
+      }
+    },
+    "activationMethod" : "MANUAL_ACTIVATION_BY_USER",
+    "remainingBatteryCapacityPercent" : {
+      "min" : {
+        "value" : 75,
+        "exclusive" : true
+      },
+      "max" : {
+        "value" : 100,
+        "exclusive" : false
+      }
+    },
+    "gnssStatus" : "LOCATION_3D"
+  },
+  "beacon23HexId" : "9934039823D324BE5638CEE",
+  "beacon15HexId" : "9934039823D324B"
+}

@@ -1,0 +1,114 @@
+{
+  "$id" : "https://amsa.gov.au/sgb",
+  "$schema" : "http://json-schema.org/draft/2019-09/schema",
+  "definitions" : {
+    "AircraftOperatorAndSerialNumber" : {
+      "type" : "object",
+      "properties" : {
+        "vesselIdType" : {
+          "$ref" : "#/definitions/VesselIdType"
+        },
+        "aircraftOperatorDesignator" : {
+          "type" : "string"
+        },
+        "serialNumber" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "vesselIdType", "aircraftOperatorDesignator", "serialNumber" ]
+    },
+    "Mmsi" : {
+      "type" : "object",
+      "properties" : {
+        "vesselIdType" : {
+          "$ref" : "#/definitions/VesselIdType"
+        },
+        "mmsi" : {
+          "type" : "integer"
+        },
+        "epirbMmsi" : {
+          "type" : "integer"
+        }
+      },
+      "required" : [ "vesselIdType" ]
+    },
+    "VesselId" : {
+      "oneOf" : [ {
+        "$ref" : "#/definitions/AircraftOperatorAndSerialNumber"
+      }, {
+        "$ref" : "#/definitions/AircraftRegistrationMarking"
+      }, {
+        "$ref" : "#/definitions/Aviation24BitAddress"
+      }, {
+        "$ref" : "#/definitions/Mmsi"
+      }, {
+        "$ref" : "#/definitions/RadioCallSign"
+      } ]
+    },
+    "RadioCallSign" : {
+      "type" : "object",
+      "properties" : {
+        "vesselIdType" : {
+          "$ref" : "#/definitions/VesselIdType"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "vesselIdType" ]
+    },
+    "AircraftRegistrationMarking" : {
+      "type" : "object",
+      "properties" : {
+        "vesselIdType" : {
+          "$ref" : "#/definitions/VesselIdType"
+        },
+        "value" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "vesselIdType" ]
+    },
+    "Beacon23HexId" : {
+      "type" : "object",
+      "properties" : {
+        "countryCode" : {
+          "type" : "integer"
+        },
+        "tac" : {
+          "type" : "integer"
+        },
+        "serialNumber" : {
+          "type" : "integer"
+        },
+        "testProtocolFlag" : {
+          "type" : "boolean"
+        },
+        "vesselId" : {
+          "$ref" : "#/definitions/VesselId"
+        }
+      },
+      "required" : [ "countryCode", "tac", "serialNumber", "testProtocolFlag" ]
+    },
+    "Aviation24BitAddress" : {
+      "type" : "object",
+      "properties" : {
+        "vesselIdType" : {
+          "$ref" : "#/definitions/VesselIdType"
+        },
+        "addressHex" : {
+          "type" : "string"
+        },
+        "aircraftOperatorDesignator" : {
+          "type" : "string"
+        }
+      },
+      "required" : [ "vesselIdType", "addressHex" ]
+    },
+    "VesselIdType" : {
+      "type" : "string",
+      "enum" : [ "AIRCRAFT_OPERATOR_AND_SERIAL_NUMBER", "AIRCRAFT_REGISTRATION_MARKING", "AVIATION_24_BIT_ADDRESS", "MMSI", "RADIO_CALL_SIGN" ]
+    }
+  },
+  "$ref" : "#/definitions/Beacon23HexId"
+}
