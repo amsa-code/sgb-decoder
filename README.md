@@ -122,3 +122,4 @@ Note that the canonical form in JSON would not have to be exactly matched as a s
 * discuss Compliance Kit with the specification authors
 * ~report error in example in specification to authors~ (fixed in rev. 7 due post March 2021)
 * how to handle invalid message bit sequences (might only affect one field). How to represent this in canonical form (or just ignore)?
+
