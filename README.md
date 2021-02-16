@@ -98,9 +98,9 @@ Dave Moten proposes that the SGBCK should look like the contents of this [folder
 * [`tests.csv`](src/test/resources/compliance-kit/tests.csv) file with columns *TYPE*, *TITLE*, *HEX*, *JSON*
 * JSON files referenced by `tests.csv`
 
-A consumer of the Compliance Kit would decode the given hex and generate the JSON canonical form string and compare it to the given JSON file (using JSON equivalence rathen exact string equality).
+A consumer of the Compliance Kit would decode the given hex and generate the JSON canonical form string and compare it to the given JSON file (using JSON equivalence rather than exact string equality).
 
-Note that there is also obvious benefit here for an encoder too with no change to the SGCK as described.
+Note that there is also an obvious benefit here for an encoder too with no change to the SGCK as described.
 
 Clearly one test in the kit does not cut it. There are many variations on field values, some are derived from special binary codes, some field values are optional.
 
