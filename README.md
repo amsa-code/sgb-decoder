@@ -112,6 +112,19 @@ If JSON or XML was used for the canonical form then it should also be described 
 
 Note that the canonical form in JSON would not have to be exactly matched as a string during a test for compliance. We don't care about whitespace outside of expressions (new lines, indents) and even field order so the match would be based on JSON equality. Every major programming language has support for this sort of equality match (either in an open-source library or in the base platform).
 
+### Which fields are higher priority for Compliance Kit coverage?
+
+The following fields from the specification are non-trivial:
+
+```
+3.7.1g Encoded GNSS location
+3.7.1h Vessel ID (5 different types)
+4.3.1a Elapsed Time since activation
+4.3.1b Time from last encoded activation
+4.3.1c Altitude Encoded location
+```
+A minimal Compliance Kit would include comprehensive tests for these fields (all their variations).
+
 ## TODO
 * will consumers need to apply BCH error code correction (which will correct up to 6 bit errors in the first 202 bits of the 250 bit SGB detection message) or is it normally done upstream?
 * create a set of test messages for the Compliance Kit
