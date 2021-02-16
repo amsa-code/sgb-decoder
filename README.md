@@ -1,4 +1,7 @@
 # sgb-decoder
+<a href="https://travis-ci.com/amsa-code/sgb-decoder"><img src="https://travis-ci.com/amsa-code/sgb-decoder.svg"/></a><br/>
+[![codecov](https://codecov.io/gh/amsa-code/sgb-decoder/branch/master/graph/badge.svg)](https://codecov.io/gh/amsa-code/sgb-decoder)<br/>
+
 Java library that decodes [Cospas-Sarsat](https://en.wikipedia.org/wiki/International_Cospas-Sarsat_Programme) Second Generation Beacon (SGB) detection messages and is compliant with the C/S T.018 Rev. 6 [specification](https://vnmcc.vishipel.vn/images/uploads/attach/T018-MAY-2020.pdf).
 
 **Features**
@@ -79,7 +82,7 @@ A beacon transmits the 202 bit SGB detection message followed by a 48 bit BCH er
 Bits bch = detection.calculateBchErrorCorrectionCode();
 System.out.println(bch.toBitString());
 ```
-Application of error corrections (when required) is presumed to happen upstream of consumers so this library ignores the BCH section of a detection message. If you'd like support for this raise an issue.
+Application of error corrections (when required) is presumed to happen upstream of consumers so this library does not support it.
 
 ## Performance
 Quick and dirty performance testing (without JMH) indicates that the the library can decode about 140,000 beacon detection messages a second. If you need faster performance than this raise an issue.
@@ -98,9 +101,9 @@ Dave Moten proposes that the SGBCK should look like the contents of this [folder
 * [`tests.csv`](src/test/resources/compliance-kit/tests.csv) file with columns *TYPE*, *TITLE*, *HEX*, *JSON*
 * JSON files referenced by `tests.csv`
 
-A consumer of the Compliance Kit would decode the given hex and generate the JSON canonical form string and compare it to the given JSON file (using JSON equivalence rather than exact string equality).
+A consumer of the Compliance Kit would decode the given hex and generate the JSON canonical form string and compare it to the given JSON file (using JSON equivalence rathen exact string equality).
 
-Note that there is also an obvious benefit here for an encoder too with no change to the SGCK as described.
+Note that there is also obvious benefit here for an encoder too with no change to the SGCK as described.
 
 Clearly one test in the kit does not cut it. There are many variations on field values, some are derived from special binary codes, some field values are optional.
 
@@ -111,19 +114,6 @@ Given that a service implementation of the decoder would probably serialize the 
 If JSON or XML was used for the canonical form then it should also be described by a schema document (JSON Schema or XSD). This library provides a JSON form and a JSON Schema document and the author suggests that **JSON format is used for the *canonical form***. 
 
 Note that the canonical form in JSON would not have to be exactly matched as a string during a test for compliance. We don't care about whitespace outside of expressions (new lines, indents) and even field order so the match would be based on JSON equality. Every major programming language has support for this sort of equality match (either in an open-source library or in the base platform).
-
-### Which fields are higher priority for Compliance Kit coverage?
-
-The following fields from the specification are non-trivial:
-
-```
-3.7.1g Encoded GNSS location
-3.7.1h Vessel ID (5 different types)
-4.3.1a Elapsed Time since activation
-4.3.1b Time from last encoded activation
-4.3.1c Altitude Encoded location
-```
-A minimal Compliance Kit would include comprehensive tests for these fields (all their variations).
 
 ## TODO
 * will consumers need to apply BCH error code correction (which will correct up to 6 bit errors in the first 202 bits of the 250 bit SGB detection message) or is it normally done upstream?
