@@ -79,7 +79,7 @@ A beacon transmits the 202 bit SGB detection message followed by a 48 bit BCH er
 Bits bch = detection.calculateBchErrorCorrectionCode();
 System.out.println(bch.toBitString());
 ```
-Application of error corrections (when required) is presumed to happen upstream of consumers so this library does not support it.
+Application of error corrections (when required) is presumed to happen upstream of consumers so this library ignores the BCH section of a detection message. If you'd like support for this raise an issue.
 
 ## Performance
 Quick and dirty performance testing (without JMH) indicates that the the library can decode about 140,000 beacon detection messages a second. If you need faster performance than this raise an issue.
