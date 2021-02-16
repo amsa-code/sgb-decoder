@@ -20,6 +20,7 @@ Java library that decodes [Cospas-Sarsat](https://en.wikipedia.org/wiki/Internat
 Status: *pre-alpha* (in development, **NOT** production ready yet)
 
 ## How to build
+
 ```bash
 mvn clean install
 ```
