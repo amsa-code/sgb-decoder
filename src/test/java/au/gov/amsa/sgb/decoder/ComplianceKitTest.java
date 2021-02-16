@@ -22,6 +22,10 @@ import au.gov.amsa.sgb.decoder.internal.Bits;
 import au.gov.amsa.sgb.decoder.internal.Util;
 import au.gov.amsa.sgb.decoder.internal.json.Json;
 
+/**
+ * Runs Compliance Kit tests and creates a draft Compliance Kit in target.
+ *
+ */
 public class ComplianceKitTest {
 
     @Test
@@ -143,6 +147,7 @@ public class ComplianceKitTest {
             this.name = name;
         }
 
+        @Override
         public String toString() {
             return name;
         }
