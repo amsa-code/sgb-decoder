@@ -12,8 +12,8 @@ Java library that decodes [Cospas-Sarsat](https://en.wikipedia.org/wiki/Internat
 * Decodes a Beacon 23 Hex Id to Java objects
 * Provides a JSON form of the Beacon 23 Hex Id ([JSON Schema](src/main/resources/beacon-23-hex-id-schema.json))
 * 100% unit test coverage (enforced)
-* *spotbugs* maximum effort static analysis enforced 
-* *pmd* static analysis enforced 
+* *spotbugs* maximum effort static analysis (enforced) 
+* *pmd* static analysis (enforced) 
 
 Status: *pre-alpha* (in development, **NOT** production ready yet)
 
@@ -132,4 +132,4 @@ Note that the canonical form in JSON would not have to be exactly matched as a s
 * discuss Compliance Kit with the specification authors
 * ~report error in example in specification to authors~ (fixed in rev. 7 due post March 2021)
 * how to handle invalid message bit sequences (might only affect one field). How to represent this in canonical form (or just ignore)?
-
+* how to communicate the existence of this library to other parties (especially RCCs worldwide) to save them a bit of time and effort (and to leverage their review and contributions)? 
