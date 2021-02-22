@@ -98,6 +98,8 @@ Producing a programming library that decodes an SGB detection message is a non-t
 
 A suggestion is that the beacons community (particularly devs) provide and maintain an SGB Compliance Kit (SGBCK) which is a list of beacon detection messages in hex form together with the corresponding decoded human and machine readable version of the detection message in some *canonical form*. If this were the case then no matter what language a decoder was written in a decent level of test coverage of that decoder would provided by consuming the (comprehensive) Compliance Kit test data. 
 
+The authors of this project are willing to coordinate and host the SGBCK on github. If some official examples can be provided to this project with a human-readable decode then the authors of this project can translate those examples into machine-readable *canonical format* and add to the SGBCK.
+
 Dave Moten proposes that the SGBCK should look like the contents of this [folder](src/test/resources/compliance-kit). The folder contains:
 * [`tests.csv`](src/test/resources/compliance-kit/tests.csv) file with columns *TYPE*, *TITLE*, *HEX*, *JSON*
 * JSON files referenced by `tests.csv`
@@ -108,6 +110,17 @@ Note that there is also obvious benefit here for an encoder too with no change t
 
 Clearly one test in the kit does not cut it. There are many variations on field values, some are derived from special binary codes, some field values are optional.
 
+### Which message fields are non-trivial to parse?
+The beacon detection message fields that are non-trivial to parse are:
+
+* 3.7.1g Encoded GNSS location
+* 3.7.1h Vessel ID (5 Variants)
+* 4.3.1a Elapsed Time since activation
+* 4.3.1b Time from last encoded location
+* 4.3.1c Altitude Encoded location
+
+A minimal SGBCK would include coverage of these non-trivial fields.
+
 ### Why use JSON as the *canonical format*
 
 Given that a service implementation of the decoder would probably serialize the decoded structure into JSON or XML, it makes sense to use one of those text formats to hold the canonical decoded form so that the implementer can reuse the canonical form work.
@@ -117,7 +130,6 @@ If JSON or XML was used for the canonical form then it should also be described 
 Note that the canonical form in JSON would not have to be exactly matched as a string during a test for compliance. We don't care about whitespace outside of expressions (new lines, indents) and even field order so the match would be based on JSON equality. Every major programming language has support for this sort of equality match (either in an open-source library or in the base platform).
 
 ## TODO
-* will consumers need to apply BCH error code correction (which will correct up to 6 bit errors in the first 202 bits of the 250 bit SGB detection message) or is it normally done upstream?
 * create a set of test messages for the Compliance Kit
 * discuss Compliance Kit with the specification authors
 * ~report error in example in specification to authors~ (fixed in rev. 7 due post March 2021)
