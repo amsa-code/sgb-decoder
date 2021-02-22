@@ -98,7 +98,7 @@ Producing a programming library that decodes an SGB detection message is a non-t
 
 A suggestion is that the beacons community (particularly devs) provide and maintain an SGB Compliance Kit (SGBCK) which is a list of beacon detection messages in hex form together with the corresponding decoded human and machine readable version of the detection message in some *canonical form*. If this were the case then no matter what language a decoder was written in a decent level of test coverage of that decoder would provided by consuming the (comprehensive) Compliance Kit test data. 
 
-The authors of this project are willing to coordinate and host the SGBCK on github. If some official examples can be provided to this project with a human-readable decode then the authors of this project can translate those examples into machine-readable *canonical format* and add to the SGBCK.
+The authors of this project are willing to coordinate and host the SGBCK on github. If some official examples can be provided to this project with a human-readable decode then the authors of this project can translate those examples into machine-readable *canonical format* and add to the SGBCK. Alternatively the community could construct beacon detection messages and submit the human-readable decode to spec authors to verify correctness at which point they can be added to the SGBCK.
 
 Dave Moten proposes that the SGBCK should look like the contents of this [folder](src/test/resources/compliance-kit). The folder contains:
 * [`tests.csv`](src/test/resources/compliance-kit/tests.csv) file with columns *TYPE*, *TITLE*, *HEX*, *JSON*
