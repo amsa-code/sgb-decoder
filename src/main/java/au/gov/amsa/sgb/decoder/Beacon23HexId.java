@@ -8,6 +8,10 @@ import au.gov.amsa.sgb.decoder.internal.Bits;
 import au.gov.amsa.sgb.decoder.internal.json.Json;
 import au.gov.amsa.sgb.decoder.vesselid.VesselId;
 
+/**
+ * Decodes a Beacon 23 Hex character ID. Based on C/T.018 Rev 6
+ * (May 2020).
+ */
 public final class Beacon23HexId {
 
     private final int countryCode;
