@@ -128,26 +128,26 @@ Let's look at the tests cases in detail:
   * South lat, W long, both with decimal parts to n(?) decimal places
   * No Capability
 * 3.7.1h Vessel ID (5 Variants)
-  *  MMSI
-    * MMSI + EPIRB MMSI present
-    * MMSI not present, EPIRB MMSI present
-    * MMSI present, EPIRB MMSI not present
-    * neither present
-  * Radio Call Sign
-    * Not present
-    * Left Justified Short (say 3 characters)
-    * Right Justified Short (defensive, whitespace trimming the found value should do the job)
-    * Uses all 7 characters
-  * Aircraft Registration Marking
-    * Not present
-    * Right Justified Short (say 3 characters)
-    * Left Justified Short (defensive, whitespace trimming the found value should do the job)
-    * Uses all 7 characters
-  * Aviation 24 Bit Addresss
-    * No Bit Address, no Aircraft Operator Designator
-    * Both present
-  * Aircraft Operator and Serial Number
-    * Both present 
+    *  MMSI
+        * MMSI + EPIRB MMSI present
+        * MMSI not present, EPIRB MMSI present
+        * MMSI present, EPIRB MMSI not present
+        * neither present
+    * Radio Call Sign
+        * Not present
+        * Left Justified Short (say 3 characters)
+        * Right Justified Short (defensive, whitespace trimming the found value should do the job)
+        * Uses all 7 characters
+    * Aircraft Registration Marking
+        * Not present
+        * Right Justified Short (say 3 characters)
+        * Left Justified Short (defensive, whitespace trimming the found value should do the job)
+        * Uses all 7 characters
+    * Aviation 24 Bit Addresss
+        * No Bit Address, no Aircraft Operator Designator
+        * Both present
+    * Aircraft Operator and Serial Number
+        * Both present 
 * 4.3.1a Elapsed Time since activation
 * 4.3.1b Time from last encoded location
 * 4.3.1c Altitude Encoded location
