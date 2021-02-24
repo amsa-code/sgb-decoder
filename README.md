@@ -24,6 +24,8 @@ mvn clean install
 ```
 The library jar will be in `target` directory.
 
+Note that the build will fail if any of the quality metric plugins (code coverage, static code analysis checks) are not at 100%.
+
 ## Getting started
 
 Add this dependency to your pom.xml:
