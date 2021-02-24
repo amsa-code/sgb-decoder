@@ -166,6 +166,8 @@ Let's look at the tests cases in detail:
     * National Use
     * Other  
 
+On the above basis the minimal set of messages in the SGBCK would be 29 messages.
+
 ### Why use JSON as the *canonical format*
 
 Given that a service implementation of the decoder would probably serialize the decoded structure into JSON or XML, it makes sense to use one of those text formats to hold the canonical decoded form so that the implementer can reuse the canonical form work.
