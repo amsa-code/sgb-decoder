@@ -139,7 +139,7 @@ Let's look at the tests cases in detail:
         * Not present
         * Left Justified Short (say 3 characters)
         * Right Justified Short (defensive, whitespace trimming the found value should do the job)
-        * Uses all 7 characters
+        * Uses all 7 characters x 6 (to test all Baudot characters)
     * Aircraft Registration Marking
         * Not present
         * Right Justified Short (say 3 characters)
@@ -166,7 +166,7 @@ Let's look at the tests cases in detail:
     * National Use
     * Other  
 
-On the above basis the minimal set of messages in the SGBCK would be 29 messages.
+On the above basis the minimal set of messages in the SGBCK would be 34 messages.
 
 ### Why use JSON as the *canonical format*
 
