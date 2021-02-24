@@ -117,7 +117,9 @@ The beacon detection message fields that are non-trivial to parse are:
 * 4.3.1b Time from last encoded location
 * 4.3.1c Altitude Encoded location
 
-In addition it would be helpful to have full coverage of the Modified Baudot Codes (to check for typos in the lookup table). There are 39 characters in the Modified Baudot Codes which could be covered fully (7 characters at a time) using 6 messages all with a Radio Call Sign (Vessel ID field).
+In addition it would be helpful to have full coverage of:
+* the Modified Baudot Codes (to check for typos in the lookup table). There are 39 characters in the Modified Baudot Codes which could be covered fully (7 characters at a time) using 6 messages all with a Radio Call Sign (Vessel ID field).
+* all Rotating Field types
 
 A minimal SGBCK would include coverage of these non-trivial fields.
 
@@ -149,8 +151,20 @@ Let's look at the tests cases in detail:
     * Aircraft Operator and Serial Number
         * Both present 
 * 4.3.1a Elapsed Time since activation
+    * Present, non-zero
 * 4.3.1b Time from last encoded location
+    * Present, non-zero
+    * Not present 
 * 4.3.1c Altitude Encoded location
+    * -400m
+    * 0m
+    * 15592m
+* Rotating Field Types
+    * Objective Requirements
+    * In-Flight Emergency
+    * RLS
+    * National Use
+    * Other  
 
 ### Why use JSON as the *canonical format*
 
