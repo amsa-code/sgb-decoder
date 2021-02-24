@@ -166,7 +166,7 @@ Let's look at the tests cases in detail:
     * National Use
     * Other  
 
-On the above basis the minimal set of messages in the SGBCK would be 34 messages.
+On the above basis the minimal set of messages in the SGBCK would be 34 messages (includes 6 Radio Call Sign messages for Baudot Code coverage).
 
 ### Why use JSON as the *canonical format*
 
