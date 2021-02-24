@@ -117,7 +117,40 @@ The beacon detection message fields that are non-trivial to parse are:
 * 4.3.1b Time from last encoded location
 * 4.3.1c Altitude Encoded location
 
+In addition it would be helpful to have full coverage of the Modified Baudot Codes (to check for typos in the lookup table). There are 39 characters in the Modified Baudot Codes which could be covered fully (7 characters at a time) using 6 messages all with a Radio Call Sign (Vessel ID field).
+
 A minimal SGBCK would include coverage of these non-trivial fields.
+
+Let's look at the tests cases in detail:
+
+* 3.7.1g Encoded GNSS location
+  * North lat, E long, both with decimal parts to n(?) decimal places
+  * South lat, W long, both with decimal parts to n(?) decimal places
+  * No Capability
+* 3.7.1h Vessel ID (5 Variants)
+  *  MMSI
+    * MMSI + EPIRB MMSI present
+    * MMSI not present, EPIRB MMSI present
+    * MMSI present, EPIRB MMSI not present
+    * neither present
+  * Radio Call Sign
+    * Not present
+    * Left Justified Short (say 3 characters)
+    * Right Justified Short (defensive, whitespace trimming the found value should do the job)
+    * Uses all 7 characters
+  * Aircraft Registration Marking
+    * Not present
+    * Right Justified Short (say 3 characters)
+    * Left Justified Short (defensive, whitespace trimming the found value should do the job)
+    * Uses all 7 characters
+  * Aviation 24 Bit Addresss
+    * No Bit Address, no Aircraft Operator Designator
+    * Both present
+  * Aircraft Operator and Serial Number
+    * Both present 
+* 4.3.1a Elapsed Time since activation
+* 4.3.1b Time from last encoded location
+* 4.3.1c Altitude Encoded location
 
 ### Why use JSON as the *canonical format*
 
