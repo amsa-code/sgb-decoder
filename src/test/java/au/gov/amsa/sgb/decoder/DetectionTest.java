@@ -17,7 +17,6 @@ import java.time.ZoneOffset;
 
 import org.junit.Test;
 
-import au.gov.amsa.sgb.decoder.internal.Bits;
 import au.gov.amsa.sgb.decoder.internal.json.Json;
 import au.gov.amsa.sgb.decoder.rotatingfield.ActivationMethod;
 import au.gov.amsa.sgb.decoder.rotatingfield.BeaconFeedback;

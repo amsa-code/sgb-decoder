@@ -20,16 +20,14 @@ import java.util.stream.Stream;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.davidmoten.guavamini.annotations.VisibleForTesting;
 
-import au.gov.amsa.sgb.decoder.Detection;
 import au.gov.amsa.sgb.decoder.internal.Util;
 
 /**
- * Simplified JSON schema generator only targeting {@link Detection} class and
+ * Simplified JSON schema generator only targeting Detection class and
  * its dependents. Honours Jackson {@link JsonIgnore} annotations on fields.
- * 
+ *
  * <p>
  * Limitations include:
- * <p>
  * <ul>
  * <li>arrays not supported (not required for Detection class)</li>
  * <li>fields are considered {@code required} if not typed using
@@ -48,14 +46,14 @@ public final class JsonSchema {
 
     /**
      * Returns the JSON Schema for the heirarchy of classes pointed to by
-     * {@code classes}. Targets {@link Detection} class only (but might be extended
+     * {@code classes}. Targets Detection class only (but might be extended
      * in the future for more). Any subclasses within the heirarchy should be
      * mentioned in {@code subclasses} so that the appropriate JSON Schema
      * structures are produced. Subclasses should include a discriminator field that
      * allows users to differentiate the JSON representations.
-     * 
+     *
      * @param cls        root class to be converted into a JSON Schema
-     * @param subclasses
+     * @param subclasses maps classes to a list of their subclasses
      * @param schemaId   value to be used in the {@code $id} field.
      * @return JSON Schema
      */
@@ -87,7 +85,7 @@ public final class JsonSchema {
     }
 
     private static final class Definition {
-        final String json;
+        private final String json;
 
         Definition(String json) {
             this.json = json;
@@ -106,20 +104,20 @@ public final class JsonSchema {
             classesAlreadyProcessed.add(cls.getName());
             // will be an implementation of HasFormatter
             fields(cls).forEach(f -> {
-                JsonType type = toJsonType(f.javaType);
+                JsonType type = toJsonType(f.javaType());
                 if (type.typeName.equals("object")) {
-                    collectDefinitions(toClass(f.javaType), clsNameDefinitions, classesAlreadyProcessed, subclasses);
+                    collectDefinitions(toClass(f.javaType()), clsNameDefinitions, classesAlreadyProcessed, subclasses);
                 } else if (type.typeName.equals("string") && !type.enumeration.isEmpty()) {
                     // TODO use classesAlreadyProcessed
                     StringBuilder json = new StringBuilder();
-                    json.append(quoted(definitionName(f.javaType)) + COLON + "{");
+                    json.append(quoted(definitionName(f.javaType())) + COLON + "{");
                     add(json, "type", "string");
                     json.append(", ");
                     json.append(quoted("enum") + COLON);
                     json.append(
                             "[" + type.enumeration.stream().map(Util::quoted).collect(Collectors.joining(COMMA)) + "]");
                     json.append("}");
-                    clsNameDefinitions.put(f.javaType, new Definition(json.toString()));
+                    clsNameDefinitions.put(f.javaType(), new Definition(json.toString()));
                 }
             });
             StringBuilder json = new StringBuilder();
@@ -149,8 +147,8 @@ public final class JsonSchema {
             }
 
             String required = fields(cls) //
-                    .filter(f -> f.required) //
-                    .map(f -> quoted(f.name)) //
+                    .filter(f -> f.isRequired()) //
+                    .map(f -> quoted(f.name())) //
                     .collect(Collectors.joining(", "));
 
             if (!required.isEmpty()) {
@@ -185,13 +183,13 @@ public final class JsonSchema {
     private static String generateDefinition(MyField f) {
         StringBuilder b = new StringBuilder();
         b.append(DQ);
-        b.append(f.name);
+        b.append(f.name());
         b.append(DQ);
         b.append(" : ");
         b.append("{");
-        JsonType t = toJsonType(f.javaType);
+        JsonType t = toJsonType(f.javaType());
         if (t.typeName.equals("object") || !t.enumeration.isEmpty()) {
-            add(b, "$ref", toRef(f.javaType));
+            add(b, "$ref", toRef(f.javaType()));
         } else if (t.typeName.equals("time")) {
             add(b, "type", "string");
             b.append(COMMA);
@@ -265,11 +263,11 @@ public final class JsonSchema {
         b.append(quoted(key) + COLON + quoted(value));
     }
 
-    private static final Map<String, String> javaTypeToJsonType = createJavaTypeToJsonTypeMap();
+    private static final Map<String, String> JAVA_TYPE_TO_JSON_TYPE = createJavaTypeToJsonTypeMap();
 
     private static final class JsonType {
-        final String typeName;
-        final List<String> enumeration;
+        private final String typeName;
+        private final List<String> enumeration;
 
         private JsonType(String name, List<String> enumeration) {
             this.typeName = name;
@@ -278,7 +276,7 @@ public final class JsonSchema {
     }
 
     private static JsonType toJsonType(String javaType) {
-        String t = javaTypeToJsonType.get(javaType);
+        String t = JAVA_TYPE_TO_JSON_TYPE.get(javaType);
         if (t != null) {
             return new JsonType(t, Collections.emptyList());
         } else {

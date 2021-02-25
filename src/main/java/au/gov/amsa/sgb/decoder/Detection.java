@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.davidmoten.guavamini.Preconditions;
 import com.github.davidmoten.guavamini.annotations.VisibleForTesting;
 
-import au.gov.amsa.sgb.decoder.internal.Bits;
 import au.gov.amsa.sgb.decoder.internal.Hex;
 import au.gov.amsa.sgb.decoder.internal.json.Json;
 import au.gov.amsa.sgb.decoder.rotatingfield.ActivationMethod;
@@ -331,7 +330,7 @@ public final class Detection {
                 shortRlmParametersBitString = Optional.of(bits.readBitString(15));
                 // skip parity bit
                 bits.skip(1);
-            } else {// OTHER
+            } else { // OTHER
                 shortRlmParametersBitString = Optional.of(bits.readBitString(15));
             }
             return Optional.of(new BeaconFeedback(rlmType1FeedbackReceived, rlmType2FeedbackReceived, rlsType,

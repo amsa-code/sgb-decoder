@@ -13,7 +13,7 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 public final class Json {
 
-    private static ObjectMapper MAPPER = createMapper();
+    private static final ObjectMapper MAPPER = createMapper();
 
     private Json() {
         // prevent instantiation

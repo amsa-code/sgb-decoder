@@ -1,8 +1,11 @@
-package au.gov.amsa.sgb.decoder.internal;
+package au.gov.amsa.sgb.decoder;
 
 import java.util.Arrays;
 
 import com.github.davidmoten.guavamini.Preconditions;
+
+import au.gov.amsa.sgb.decoder.internal.BaudotCode;
+import au.gov.amsa.sgb.decoder.internal.Hex;
 
 public final class Bits {
 
@@ -70,7 +73,7 @@ public final class Bits {
 
     /**
      * Assumes the most significant bit is on the left.
-     * 
+     *
      * @param numBits number of bits reads
      * @return the bits as an integer
      */

@@ -29,7 +29,9 @@
 
         <jackson.version>2.12.1</jackson.version>
 
-        <checkstyle.version>3.1.1</checkstyle.version>
+        <checkstyle.version>3.1.2</checkstyle.version>
+        <checkstyle.xml>src/main/checkstyle/checkstyle.xml</checkstyle.xml>
+        <checkstyle.core.version>8.40</checkstyle.core.version>
         <javadoc.version>3.2.0</javadoc.version>
         <pmd.version>3.14.0</pmd.version>
         <project.info.version>3.1.1</project.info.version>
@@ -106,7 +108,6 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
 
         <dependency>
             <groupId>com.github.davidmoten</groupId>
@@ -260,6 +261,34 @@
                     <obrRepository>NONE</obrRepository>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.version}</version>
+                <configuration>
+                    <configLocation>${checkstyle.xml}</configLocation>
+                    <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${checkstyle.core.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <reporting>
@@ -282,6 +311,8 @@
                 <version>${checkstyle.version}</version>
                 <configuration>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                    <configLocation>${checkstyle.xml}</configLocation>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <plugin>

@@ -10,7 +10,7 @@ import com.github.davidmoten.guavamini.annotations.VisibleForTesting;
  */
 public final class BaudotCode {
 
-    private static final Map<Integer, Character> map = createMap();
+    private static final Map<Integer, Character> MAP = createMap();
 
     private BaudotCode() {
         // prevent instantiation
@@ -65,7 +65,7 @@ public final class BaudotCode {
     }
 
     public static char toChar(int code) {
-        Character ch = map.get(code);
+        Character ch = MAP.get(code);
         if (ch == null) {
             throw new IllegalArgumentException("character not found for decimal BaudotCode " + code);
         } else {
@@ -79,7 +79,7 @@ public final class BaudotCode {
 
     @VisibleForTesting
     static int size() {
-        return map.size();
+        return MAP.size();
     }
 
 }
