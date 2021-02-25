@@ -1,11 +1,8 @@
-package au.gov.amsa.sgb.decoder;
+package au.gov.amsa.sgb.decoder.internal;
 
 import java.util.Arrays;
 
 import com.github.davidmoten.guavamini.Preconditions;
-
-import au.gov.amsa.sgb.decoder.internal.BaudotCode;
-import au.gov.amsa.sgb.decoder.internal.Hex;
 
 public final class Bits {
 

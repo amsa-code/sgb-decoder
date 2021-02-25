@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import com.google.common.io.Files;
 
+import au.gov.amsa.sgb.decoder.internal.Bits;
 import au.gov.amsa.sgb.decoder.internal.Util;
 import au.gov.amsa.sgb.decoder.internal.json.Json;
 

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.github.davidmoten.guavamini.Preconditions;
 
+import au.gov.amsa.sgb.decoder.internal.Bits;
 import au.gov.amsa.sgb.decoder.internal.json.Json;
 import au.gov.amsa.sgb.decoder.vesselid.VesselId;
 

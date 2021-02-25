@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.davidmoten.guavamini.Preconditions;
 import com.github.davidmoten.guavamini.annotations.VisibleForTesting;
 
+import au.gov.amsa.sgb.decoder.internal.Bits;
 import au.gov.amsa.sgb.decoder.internal.Hex;
 import au.gov.amsa.sgb.decoder.internal.json.Json;
 import au.gov.amsa.sgb.decoder.rotatingfield.ActivationMethod;
@@ -89,7 +90,8 @@ public final class Detection {
         return fromBitString(bitString);
     }
 
-    public static Detection from(Bits bits) {
+    @VisibleForTesting
+    static Detection from(Bits bits) {
         return new Detection(bits);
     }
 
