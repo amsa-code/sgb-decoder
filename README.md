@@ -14,6 +14,7 @@ Java library that decodes [Cospas-Sarsat](https://en.wikipedia.org/wiki/Internat
 * 100% unit test coverage (enforced)
 * *spotbugs* maximum effort static analysis (enforced) 
 * *pmd* static analysis (enforced) 
+* *checkstyle* static analysis (enforced)
 
 Status: *pre-alpha* (in development, **NOT** production ready yet)
 
