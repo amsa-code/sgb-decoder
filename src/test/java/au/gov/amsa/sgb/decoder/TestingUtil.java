@@ -15,6 +15,10 @@ import au.gov.amsa.sgb.decoder.internal.json.Json;
 
 public final class TestingUtil {
 
+    private TestingUtil() {
+        // prevent instantiation
+    }
+
     public static String readResource(String resourceName) {
         try (InputStream in = TestingUtil.class.getResourceAsStream(resourceName)) {
             return new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8)).lines()

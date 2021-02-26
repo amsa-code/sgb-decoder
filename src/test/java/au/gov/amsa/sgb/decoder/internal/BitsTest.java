@@ -114,11 +114,11 @@ public final class BitsTest {
         Bits b = Bits.from("1110001");
         {
             boolean[] a = b.readBooleanArray(3);
-            assertArrayEquals(new boolean[] { true, true, true }, a);
+            assertArrayEquals(new boolean[] {true, true, true }, a);
         }
         {
             boolean[] a = b.readBooleanArray(4);
-            assertArrayEquals(new boolean[] { false, false, false, true }, a);
+            assertArrayEquals(new boolean[] {false, false, false, true }, a);
         }
     }
 

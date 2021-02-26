@@ -155,10 +155,10 @@ public class ComplianceKitTest {
 
     static final class KitTest {
 
-        final TestType type;
-        final String title;
-        final String hex;
-        final String filename;
+        private final TestType type;
+        private final String title;
+        private final String hex;
+        private final String filename;
 
         private KitTest(TestType type, String title, String hex, String filename) {
             this.type = type;

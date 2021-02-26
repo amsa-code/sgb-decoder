@@ -142,9 +142,9 @@ public class JsonSchemaTest {
 
     private static final class Recursive {
         @SuppressWarnings("unused")
-        int number;
+        private int number;
 
         @SuppressWarnings("unused")
-        Recursive rec;
+        private Recursive rec;
     }
 }
