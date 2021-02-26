@@ -16,7 +16,7 @@
     <version>0.1-SNAPSHOT</version>
 
     <name>${project.artifactId}</name>
-    <description>Decodes second generation Beacon detections</description>
+    <description>Decodes second generation Beacon detection messages and Beacon 23 Hex IDs</description>
     <packaging>bundle</packaging>
 
     <url>http://github.com/amsa-code/sgb-decoder</url>
