@@ -18,6 +18,8 @@ Java library that decodes [Cospas-Sarsat](https://en.wikipedia.org/wiki/Internat
 
 Status: *pre-alpha* (in development, **NOT** production ready yet)
 
+Maven [reports](https://amsa-code.github.io/sgb-decoder/index.html) including [javadocs](https://amsa-code.github.io/sgb-decoder/apidocs/index.html)
+
 ## How to build
 
 ```bash
