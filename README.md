@@ -181,6 +181,13 @@ If JSON or XML was used for the canonical form then it should also be described 
 
 Note that the canonical form in JSON would not have to be exactly matched as a string during a test for compliance. We don't care about whitespace outside of expressions (new lines, indents) and even field order so the match would be based on JSON equality. Every major programming language has support for this sort of equality match (either in an open-source library or in the base platform).
 
+## Release instructions for project owner
+
+When a release is built you publish javadocs and site reports like this:
+
+    git checkout <RELEASE_TAG>
+    ./generate-site.sh
+
 ## TODO
 * create a set of test messages for the Compliance Kit
 * discuss Compliance Kit with the specification authors
