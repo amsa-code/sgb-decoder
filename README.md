@@ -1,7 +1,7 @@
 # sgb-decoder
 <a href="https://travis-ci.com/amsa-code/sgb-decoder"><img src="https://travis-ci.com/amsa-code/sgb-decoder.svg"/></a><br/>
 [![codecov](https://codecov.io/gh/amsa-code/sgb-decoder/branch/master/graph/badge.svg)](https://codecov.io/gh/amsa-code/sgb-decoder)<br/>
-
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/au.gov.amsa/sgb-decoder/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/au.gov.amsa/sgb-decoder)<br/>
 Java library that decodes [Cospas-Sarsat](https://en.wikipedia.org/wiki/International_Cospas-Sarsat_Programme) Second Generation Beacon (SGB) detection messages and is compliant with the C/S T.018 Rev. 6 [specification](https://vnmcc.vishipel.vn/images/uploads/attach/T018-MAY-2020.pdf).
 
 **Features**
