@@ -21,7 +21,7 @@ jobs:
           java-version: 11
 
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B -P ossrh,release package --file pom.xml
 
       - name: Set up Apache Maven Central
         uses: actions/setup-java@v1
@@ -34,7 +34,7 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
 
       - name: Publish to Apache Maven Central
-        run: mvn -Prelease deploy
+        run: mvn -P ossrh,release deploy
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
