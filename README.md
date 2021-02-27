@@ -183,6 +183,27 @@ Note that the canonical form in JSON would not have to be exactly matched as a s
 
 ## Release instructions for project owner
 
+GitHub Workflow has been set up for this project. The following repository secrets are set in the settings on GitHub of this project:
+
+* OSSRH_USERNAME, OSSRH_PASSWORD is the credential pair for the Sonatype account that has permissions to publish to `au.gov.amsa`.
+* GPG_PASSPHRASE is the GPG passphrase used for signing artifacts
+* GPG_SECRET_KEYS_ARMOR is the result of exporting secret keys in Armor format:
+
+```bash
+gpg --list-secret-keys
+## copy the id (a long hex string) of the key you want to use and paste into this command:
+gpg --armor --export-secret-keys <ID> >~/private.key
+# then paste the contents of private.key into the secret for GPG_SECRET_KEYS_ARMOR
+``` 
+To release a new version:
+
+```bash
+./release.sh <VERSION>
+```
+If the script succeeds then go to [Releases](https://github.com/amsa-code/sgb-decoder/releases) and edit the new one and hit Publish.
+
+When a release (or pre-release) is published on Github, an action runs to deploy that release to Maven Central.
+
 When a release is built you publish javadocs and site reports like this:
 
     git checkout <RELEASE_TAG>
