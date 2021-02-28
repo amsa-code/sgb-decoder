@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: ReleaseToMavenCentral
+name: DeployReleaseToMavenCentral
 
 on:
   release:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   release:
-    name: Release on Sonatype OSS
+    name: Deploy Release to Maven Central Sonatype OSSRH
     runs-on: ubuntu-latest
 
     steps:
@@ -20,10 +20,12 @@ jobs:
         with:
           java-version: 11
 
-      - name: Build with Maven
-        run: mvn -B -P ossrh,release package --file pom.xml
+      - name: Build with Maven 
+        # checks that jar and javadoc builds
+        # javadoc jar will be reused in the mvn deploy 
+        run: mvn -B package --file pom.xml
 
-      - name: Set up Apache Maven Central
+      - name: Set up Maven settings
         uses: actions/setup-java@v1
         with: # running setup-java again overwrites the settings.xml
           java-version: 11
@@ -33,7 +35,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_SECRET_KEYS_ARMOR }}
           gpg-passphrase: GPG_PASSPHRASE
 
-      - name: Publish to Apache Maven Central
+      - name: Sign and publish to Apache Maven Central
         run: mvn -P ossrh,release deploy
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
