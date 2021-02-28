@@ -37,7 +37,7 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_SECRET_KEYS_ARMOR }}
           gpg-passphrase: GPG_PASSPHRASE
 
-      - name: Sign and publish to Apache Maven Central
+      - name: Sign and publish to Maven Central
         run: mvn -P ossrh,release deploy
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
