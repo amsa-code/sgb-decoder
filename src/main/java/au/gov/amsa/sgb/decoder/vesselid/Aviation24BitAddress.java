@@ -14,6 +14,7 @@ public final class Aviation24BitAddress implements VesselId {
         this.aircraftOperatorDesignator = aircraftOperatorDesignator;
     }
 
+    @Override
     public VesselIdType vesselIdType() {
         return vesselIdType;
     }

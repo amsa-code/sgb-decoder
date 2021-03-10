@@ -19,6 +19,7 @@ public final class Rls implements RotatingField {
         this.beaconFeedback = beaconFeedback;
     }
 
+    @Override
     public RotatingFieldType rotatingFieldType() {
         return rotatingFieldType;
     }

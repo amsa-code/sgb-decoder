@@ -14,6 +14,7 @@ public final class Mmsi implements VesselId {
         this.epirbMmsi = epirbMmsi;
     }
 
+    @Override
     public VesselIdType vesselIdType() {
         return vesselIdType;
     }

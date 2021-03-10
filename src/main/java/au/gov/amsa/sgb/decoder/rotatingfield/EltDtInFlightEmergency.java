@@ -23,6 +23,7 @@ public final class EltDtInFlightEmergency implements RotatingField {
         this.remainingBatteryCapacityPercent = remainingBatteryCapacityPercent;
     }
 
+    @Override
     public RotatingFieldType rotatingFieldType() {
         return rotatingFieldType;
     }

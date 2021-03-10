@@ -20,6 +20,7 @@ public final class AircraftRegistrationMarking implements VesselId {
         }
     }
 
+    @Override
     public VesselIdType vesselIdType() {
         return vesselIdType;
     }

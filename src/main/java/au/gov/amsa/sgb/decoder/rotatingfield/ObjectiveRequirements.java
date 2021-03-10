@@ -29,6 +29,7 @@ public final class ObjectiveRequirements implements RotatingField {
         this.gnssStatus = gnssStatus;
     }
 
+    @Override
     public RotatingFieldType rotatingFieldType() {
         return rotatingFieldType;
     }

@@ -12,6 +12,7 @@ public final class AircraftOperatorAndSerialNumber implements VesselId {
         this.serialNumber = serialNumber;
     }
 
+    @Override
     public VesselIdType vesselIdType() {
         return vesselIdType;
     }

@@ -10,6 +10,7 @@ public final class UnknownRotatingField implements RotatingField {
         this.bitString = bitString;
     }
 
+    @Override
     public RotatingFieldType rotatingFieldType() {
         return rotatingFieldType;
     }
