@@ -41,6 +41,8 @@ import au.gov.amsa.sgb.decoder.vesselid.VesselId;
  */
 public final class Detection {
 
+    private static final String EPIRB_MMSI_PREFIX = "974";
+
     private static final Bits NO_ENCODED_LOCATION_CAPABILITY = Bits
             .from("11111111000001111100000111111111111110000011111");
 
@@ -463,7 +465,7 @@ public final class Detection {
         String mmsiString = padLeftWithZeros(mmsi, 9);
         int epirbLast4 = bits.readUnsignedInt(14);
         String epirbLast4String = padLeftWithZeros(epirbLast4, 4);
-        String epirbMmsi = "974" + mmsiString.charAt(3) + mmsiString.charAt(4) + epirbLast4String;
+        String epirbMmsi = EPIRB_MMSI_PREFIX + mmsiString.charAt(3) + mmsiString.charAt(4) + epirbLast4String;
         final Optional<Integer> a;
         if (mmsi == 111111) {
             a = Optional.empty();
