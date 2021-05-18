@@ -21,6 +21,10 @@ Status: *pre-alpha* (in development, **NOT** production ready yet)
 
 Maven [reports](https://amsa-code.github.io/sgb-decoder/index.html) including [javadocs](https://amsa-code.github.io/sgb-decoder/apidocs/index.html)
 
+## Online demo
+
+See https://0w66030c9i.execute-api.ap-southeast-2.amazonaws.com/dev/v1/site/index.html to decode to json online.
+
 ## How to build
 
 ```bash
