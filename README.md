@@ -84,6 +84,9 @@ Output is [here](src/test/resources/compliance-kit/beacon-23-hex-id-sample.json)
 
 The JSON Schema for the above is [here](src/main/resources/beacon-23-hex-id-schema.json).
 
+### Making the keys more human readable
+The json returned by the decoding functions has keys without spaces, camel-cased. You can use [KeyPrettify.prettify](src/main/java/au/gov/amsa/sgb/decoder/KeyPrettify.java) to convert a value like `rlmType1GnssLocation` to `RLM Type 1 GNSS Location`. 
+
 ## BCH Error Correction
 A beacon transmits the 202 bit SGB detection message followed by a 48 bit BCH error correction code. You can calculate the code expected from the 202 bit SGB detection message like this:
 
