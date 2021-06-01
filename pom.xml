@@ -7,7 +7,7 @@
 
     <groupId>au.gov.amsa</groupId>
     <artifactId>sgb-decoder</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <name>${project.artifactId}</name>
     <description>Decodes second generation Beacon detection messages and Beacon 23 Hex IDs</description>
@@ -26,18 +26,18 @@
         <checkstyle.version>3.1.2</checkstyle.version>
         <checkstyle.xml>src/main/checkstyle/checkstyle.xml</checkstyle.xml>
         <checkstyle.suppressions.xml>src/main/checkstyle/suppressions.xml</checkstyle.suppressions.xml>
-        <checkstyle.core.version>8.40</checkstyle.core.version>
-        <javadoc.version>3.2.0</javadoc.version>
+        <checkstyle.core.version>8.43</checkstyle.core.version>
+        <javadoc.version>3.3.0</javadoc.version>
         <pmd.version>3.14.0</pmd.version>
-        <project.info.version>3.1.1</project.info.version>
-        <jxr.version>3.0.0</jxr.version>
+        <project.info.version>3.1.2</project.info.version>
+        <jxr.version>3.1.1</jxr.version>
         <taglist.version>2.4</taglist.version>
-        <spotbugs.version>4.2.0</spotbugs.version>
+        <spotbugs.version>4.2.3</spotbugs.version>
         <m3.site.version>3.9.1</m3.site.version>
         <changelog.version>2.2</changelog.version>
         <changelog.version>2.2</changelog.version>
-        <bundle.plugin.version>5.1.1</bundle.plugin.version>
-        <jacoco.version>0.8.6</jacoco.version>
+        <bundle.plugin.version>5.1.2</bundle.plugin.version>
+        <jacoco.version>0.8.7</jacoco.version>
 
         <line.coverage>1.00</line.coverage>
         <branch.coverage>1.00</branch.coverage>
@@ -121,7 +121,7 @@
         <dependency>
             <groupId>com.github.davidmoten</groupId>
             <artifactId>junit-extras</artifactId>
-            <version>0.3</version>
+            <version>0.4</version>
             <scope>test</scope>
         </dependency>
 
@@ -136,6 +136,26 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.0.0-M3</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.5.0</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
@@ -174,7 +194,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${javadoc.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -388,7 +408,7 @@
 
     <profiles>
         <profile>
-            <id>ossrh</id>
+            <id>release</id>
             <build>
                 <plugins>
                     <plugin>
@@ -402,29 +422,10 @@
                             <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
-                </plugins>
-            </build>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <name>Maven Central</name>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-                <repository>
-                    <id>ossrh</id>
-                    <name>Maven Central</name>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
+                        <version>3.0.1</version>
                         <configuration>
                             <gpgArguments>
                                 <arg>--pinentry-mode</arg>
@@ -443,6 +444,18 @@
                     </plugin>
                 </plugins>
             </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <name>Maven Central</name>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <name>Maven Central</name>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+                </repository>
+            </distributionManagement>
         </profile>
     </profiles>
 

@@ -1,5 +1,5 @@
 # sgb-decoder
-<a href="https://travis-ci.com/amsa-code/sgb-decoder"><img src="https://travis-ci.com/amsa-code/sgb-decoder.svg"/></a><br/>
+<a href="https://github.com/amsa-code/sgb-decoder/actions/workflows/ci.yml"><img src="https://github.com/amsa-code/sgb-decoder/actions/workflows/ci.yml/badge.svg"/></a><br/>
 [![codecov](https://codecov.io/gh/amsa-code/sgb-decoder/branch/master/graph/badge.svg)](https://codecov.io/gh/amsa-code/sgb-decoder)<br/>
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/au.gov.amsa/sgb-decoder/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/au.gov.amsa/sgb-decoder)<br/>
 
@@ -20,6 +20,10 @@ Java library that decodes [Cospas-Sarsat](https://en.wikipedia.org/wiki/Internat
 Status: *pre-alpha* (in development, **NOT** production ready yet)
 
 Maven [reports](https://amsa-code.github.io/sgb-decoder/index.html) including [javadocs](https://amsa-code.github.io/sgb-decoder/apidocs/index.html)
+
+## Online demo
+
+See https://0w66030c9i.execute-api.ap-southeast-2.amazonaws.com/dev/v1/site/index.html to decode to json online.
 
 ## How to build
 
@@ -79,6 +83,9 @@ System.out.println(d.toJson());
 Output is [here](src/test/resources/compliance-kit/beacon-23-hex-id-sample.json).
 
 The JSON Schema for the above is [here](src/main/resources/beacon-23-hex-id-schema.json).
+
+### Making the keys more human readable
+The json returned by the decoding functions has keys without spaces, camel-cased. You can use [KeyPrettify.prettify](src/main/java/au/gov/amsa/sgb/decoder/KeyPrettify.java) to convert a value like `rlmType12GnssLocation` to `RLM Type 12 GNSS Location`. 
 
 ## BCH Error Correction
 A beacon transmits the 202 bit SGB detection message followed by a 48 bit BCH error correction code. You can calculate the code expected from the 202 bit SGB detection message like this:
