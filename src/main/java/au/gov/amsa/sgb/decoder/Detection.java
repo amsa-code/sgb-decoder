@@ -478,8 +478,7 @@ public final class Detection {
         } else {
             b = Optional.of(Integer.parseInt(epirbMmsi));
         }
-        Mmsi m = new Mmsi(a, b);
-        return m;
+        return new Mmsi(a, b);
     }
 
     @VisibleForTesting
