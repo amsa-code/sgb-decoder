@@ -34,5 +34,11 @@ public class Beacon23HexIdTest {
     public void testDecodeHexWrongSize() {
         Beacon23HexId.fromHex("123");
     }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testBadBaudotCode() {
+        // contains a baudot code of 14 which is not permitted
+        Beacon23HexId.fromHex("ADF7DA6D7092E33BA475940");
+    }
 
 }
