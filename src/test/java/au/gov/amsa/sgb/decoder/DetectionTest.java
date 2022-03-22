@@ -149,20 +149,18 @@ public class DetectionTest {
 
     @Test
     public void testReadVesselIdAicraftRegistrationMarking() {
-        // two zeros then a space then VH-ABC using Baudot
         Bits b = createVesselIdAircraftRegistrationMarkingVhAbc();
         AircraftRegistrationMarking a = Detection.readVesselIdAicraftRegistrationMarking(b);
         assertEquals("VH-ABC", a.value().get());
     }
 
     static Bits createVesselIdAircraftRegistrationMarkingVhAbc() {
-        return Bits.from("00100100101111100101011000111000110011101110");
+        return Bits.from("10010010111110010101100011100011001110111000");
     }
 
     @Test
     public void testReadVesselIdAicraftRegistrationMarkingNotPresent() {
-        // two zeros then spaces using Baudot
-        Bits b = Bits.from("00100100100100100100100100100100100100100100");
+        Bits b = Bits.from("10010010010010010010010010010010010010010000");
         AircraftRegistrationMarking a = Detection.readVesselIdAicraftRegistrationMarking(b);
         assertFalse(a.value().isPresent());
     }
@@ -176,18 +174,18 @@ public class DetectionTest {
 
     @Test
     public void testReadVesselIdRadioCallSign() {
-        Bits b = createVesselIdRadioCallSignForBingo();
+        Bits b = createVesselIdRadioCallSignForAbcSpace123();
         RadioCallSign a = Detection.readVesselIdRadioCallSign(b);
-        assertEquals("BINGO", a.value().get());
+        assertEquals("ABC 123", a.value().get());
     }
 
-    private static Bits createVesselIdRadioCallSignForBingo() {
-        return Bits.from("00110011101100100110101011100011100100100100");
+    private static Bits createVesselIdRadioCallSignForAbcSpace123() {
+        return Bits.from("11100011001110111010010001110101100101000000");
     }
 
     @Test
     public void testReadVesselIdRadioCallSignNotPresent() {
-        Bits b = Bits.from("00100100100100100100100100100100100100100100");
+        Bits b = Bits.from("10010010010010010010010010010010010010010000");
         RadioCallSign a = Detection.readVesselIdRadioCallSign(b);
         assertFalse(a.value().isPresent());
     }
@@ -195,8 +193,8 @@ public class DetectionTest {
     @Test
     public void testReadVesselIdWithRadioCallSign() {
         RadioCallSign a = (RadioCallSign) Detection
-                .readVesselId(Bits.from("010").concatWith(createVesselIdRadioCallSignForBingo())).get();
-        assertEquals("BINGO", a.value().get());
+                .readVesselId(Bits.from("010").concatWith(createVesselIdRadioCallSignForAbcSpace123())).get();
+        assertEquals("ABC 123", a.value().get());
     }
 
     @Test
@@ -563,7 +561,20 @@ public class DetectionTest {
         assertEquals(-48.79315185546875, p.lat(), 0.0000001);
         assertEquals(-69.00875854492188, p.lon(), 0.0000001);
     }
-
+    
+    @Test
+    public void testReadVesselId() {
+        Bits bits = Bits.from("11100011001110111010010001110101100101000000");
+        assertEquals("ABC 123", Detection.readVesselIdRadioCallSign(bits).value().get());
+    }
+    
+    @Test
+    public void testRotatingFieldTypeInLongMessage() {
+        Detection d = Detection.fromHexGroundSegmentRepresentation(
+                "0039823D32618658622811F725F2B1C67703FFF004030680258");
+        System.out.println(d);   
+    }
+    
     private static String leftPadWithZeros(String s, int length) {
         while (s.length() < length) {
             s = "0" + s;
