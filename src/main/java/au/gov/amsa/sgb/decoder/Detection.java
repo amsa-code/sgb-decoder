@@ -492,15 +492,15 @@ public final class Detection {
 
     @VisibleForTesting
     static RadioCallSign readVesselIdRadioCallSign(Bits bits) {
-        bits.skip(2);
         String s = bits.readBaudotCharacters(7).trim();
+        bits.skip(2);
         return new RadioCallSign(s);
     }
 
     @VisibleForTesting
     static AircraftRegistrationMarking readVesselIdAicraftRegistrationMarking(Bits bits) {
-        bits.skip(2);
         String s = bits.readBaudotCharacters(7).trim();
+        bits.skip(2);
         return new AircraftRegistrationMarking(s);
     }
 

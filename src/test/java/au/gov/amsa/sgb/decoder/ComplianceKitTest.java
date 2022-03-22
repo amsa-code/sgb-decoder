@@ -115,6 +115,7 @@ public class ComplianceKitTest {
                 .map(line -> line.trim()) //
                 .filter(line -> !line.isEmpty()) //
                 .forEach(line -> {
+                    System.out.println(line);
                     String[] items = line.split(",");
                     assertEquals(4, items.length);
                     String type = removeQuotes(items[0]);
