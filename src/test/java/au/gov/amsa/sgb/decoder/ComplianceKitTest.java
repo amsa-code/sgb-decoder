@@ -67,8 +67,8 @@ public class ComplianceKitTest {
                 .filename("detection-with-aircraft-registration-marking.json") //
                 .addTo(kit, tests);
         KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("Specification example B-2") //
-                .hex("9934039823D000000000000") //
+                .title("G.005 Specification Checksum example") //
+                .hex("CCB7EA73355000000000000") //
                 .filename("beacon-23-hex-id-sample.json") //
                 .addTo(kit, tests);
 

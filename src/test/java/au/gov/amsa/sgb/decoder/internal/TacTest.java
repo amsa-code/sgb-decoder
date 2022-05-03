@@ -3,10 +3,16 @@ package au.gov.amsa.sgb.decoder.internal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.util.List;
 
 import org.junit.Test;
+
+import au.gov.amsa.sgb.decoder.Beacon23HexId;
 
 public class TacTest {
 
@@ -32,5 +38,18 @@ public class TacTest {
     public void testLoadErrors() throws MalformedURLException {
         Tac.loadDescriptions(new URL("http://with space"));
     }
-
+    
+    public static void main(String[] args) throws IOException {
+        List<String> list = Files.readAllLines(new File("/home/dave/temp.txt").toPath());
+        for (String id: list) {
+            try {
+                System.out.println("-----------------------------");
+                System.out.println(id);
+            System.out.println(Beacon23HexId.fromHex(id).toJson());
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 }

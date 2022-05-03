@@ -3,4 +3,4 @@ TYPE,TITLE,HEX,JSON
 "Detection","Example B-2 with Vessel Id of type MMSI","0039823D32618658622811F23ADE68AA17E3FFF004030680258","detection-with-mmsi-vessel-id.json"
 "Detection","Example B-2 with Vessel Id Aircraft Operator and Serial Number","0039823D32618658622811FB7AC403C00003FFF004030680258","detection-with-aircraft-operator-and-serial-number.json"
 "Detection","Example B-2 with Vessel Id Aircraft Registration Marking","0039823D32618658622811F725F2B1C67703FFF004030680258","detection-with-aircraft-registration-marking.json"
-"Beacon23HexId","Specification example B-2","9934039823D000000000000","beacon-23-hex-id-sample.json"
+"Beacon23HexId","G.005 Specification example","CCB7EA73355000000000000","beacon-23-hex-id-sample.json"
