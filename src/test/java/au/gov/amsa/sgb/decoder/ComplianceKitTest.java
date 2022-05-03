@@ -37,7 +37,7 @@ public class ComplianceKitTest {
     public void testCreateComplianceKitInTargetFolder() throws ComparisonFailure, IOException {
 
         // When new hex tests are obtained (confirmed ones from community/spec authors)
-        // then they are added below. Once happy with the tests they are copied from
+        // then they are added below. Once happy with the tests they are copied manually from
         // target/compliance-kit to src/test/resources/compliance-kit as a permanent
         // test for the build
 
