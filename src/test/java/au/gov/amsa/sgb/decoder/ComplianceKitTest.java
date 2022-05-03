@@ -78,7 +78,7 @@ public class ComplianceKitTest {
 
     private static void writeCsv(File kit, List<KitTest> tests) {
         StringBuilder b = new StringBuilder();
-        b.append("TYPE,TITLE,HEX,JSON");
+        b.append("TYPE,TITLE,HEX,JSON\n");
         for (KitTest test : tests) {
             b.append(test.toCsvLine());
             b.append("\n");
