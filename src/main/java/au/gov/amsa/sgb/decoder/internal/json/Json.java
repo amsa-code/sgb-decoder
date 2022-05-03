@@ -27,6 +27,7 @@ public final class Json {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static ObjectMapper createMapper() {
         ObjectMapper m = new ObjectMapper();
 

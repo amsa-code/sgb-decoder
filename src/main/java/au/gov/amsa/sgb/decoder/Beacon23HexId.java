@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.github.davidmoten.guavamini.Preconditions;
 
 import au.gov.amsa.sgb.decoder.internal.Bits;
+import au.gov.amsa.sgb.decoder.internal.Tac;
 import au.gov.amsa.sgb.decoder.internal.json.Json;
 import au.gov.amsa.sgb.decoder.vesselid.VesselId;
 
@@ -16,6 +17,7 @@ public final class Beacon23HexId {
 
     private final int countryCode;
     private final int tac;
+    private final Optional<String> tacDescription;
     private final int serialNumber;
     private final boolean testProtocolFlag;
     private final Optional<VesselId> vesselId;
@@ -27,6 +29,7 @@ public final class Beacon23HexId {
         countryCode = bits.readUnsignedInt(10);
         bits.skip(3);
         tac = bits.readUnsignedInt(16);
+        tacDescription = Tac.description(tac);
         serialNumber = bits.readUnsignedInt(14);
         testProtocolFlag = bits.readBoolean();
         vesselId = Detection.readVesselId(bits);
@@ -42,6 +45,10 @@ public final class Beacon23HexId {
 
     public int tac() {
         return tac;
+    }
+    
+    public Optional<String> tacDescription() {
+        return tacDescription;
     }
 
     public int serialNumber() {

@@ -1,0 +1,9 @@
+#start of range, TAC description
+
+9998,Type Approval Testing
+10000,PLB
+12000,EPIRB
+14000,ELT
+16000,ELT(DT)
+18000,Reserved - Future Use
+65521,Reserved - System Beacons
