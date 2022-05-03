@@ -3,16 +3,10 @@ package au.gov.amsa.sgb.decoder.internal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.util.List;
 
 import org.junit.Test;
-
-import au.gov.amsa.sgb.decoder.Beacon23HexId;
 
 public class TacTest {
 
