@@ -26,30 +26,17 @@ public class TacTest {
         assertFalse(Tac.description(1).isPresent());
         assertEquals("PLB", Tac.description(10000).get());
         assertEquals("PLB", Tac.description(10001).get());
-        assertEquals("Type Approval Testing", Tac.description(9998).get());
+        assertEquals("TYPE_APPROVAL_TESTING", Tac.description(9998).get());
         assertEquals("EPIRB", Tac.description(12000).get());
         assertEquals("ELT", Tac.description(14000).get());
-        assertEquals("ELT(DT)", Tac.description(16000).get());
-        assertEquals("Reserved - Future Use", Tac.description(18000).get());
-        assertEquals("Reserved - System Beacons", Tac.description(65535).get());
+        assertEquals("ELT_DT", Tac.description(16000).get());
+        assertEquals("RESERVED_FUTURE_USE", Tac.description(18000).get());
+        assertEquals("RESERVED_SYSTEM_BEACONS", Tac.description(65535).get());
     }
 
     @Test(expected = RuntimeException.class)
     public void testLoadErrors() throws MalformedURLException {
         Tac.loadDescriptions(new URL("http://with space"));
-    }
-    
-    public static void main(String[] args) throws IOException {
-        List<String> list = Files.readAllLines(new File("/home/dave/temp.txt").toPath());
-        for (String id: list) {
-            try {
-                System.out.println("-----------------------------");
-                System.out.println(id);
-            System.out.println(Beacon23HexId.fromHex(id).toJson());
-            } catch (RuntimeException e) {
-                e.printStackTrace();
-            }
-        }
     }
     
 }

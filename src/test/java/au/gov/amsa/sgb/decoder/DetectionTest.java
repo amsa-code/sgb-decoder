@@ -572,7 +572,7 @@ public class DetectionTest {
     public void testRotatingFieldTypeInLongMessage() {
         Detection d = Detection.fromHexGroundSegmentRepresentation(
                 "0039823D32618658622811F725F2B1C67703FFF004030680258");
-        System.out.println(d);   
+        assertTrue(d.toString().startsWith("{"));  
     }
     
     private static String leftPadWithZeros(String s, int length) {
