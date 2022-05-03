@@ -78,6 +78,9 @@
         "tac" : {
           "type" : "integer"
         },
+        "tacDescription" : {
+          "type" : "string"
+        },
         "serialNumber" : {
           "type" : "integer"
         },

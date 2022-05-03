@@ -1,6 +1,7 @@
 {
-  "countryCode" : 201,
-  "tac" : 230,
-  "serialNumber" : 573,
+  "countryCode" : 613,
+  "tac" : 64156,
+  "tacDescription" : "RESERVED_FUTURE_USE",
+  "serialNumber" : 13141,
   "testProtocolFlag" : false
 }

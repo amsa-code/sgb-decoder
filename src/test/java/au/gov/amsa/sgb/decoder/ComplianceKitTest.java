@@ -37,7 +37,7 @@ public class ComplianceKitTest {
     public void testCreateComplianceKitInTargetFolder() throws ComparisonFailure, IOException {
 
         // When new hex tests are obtained (confirmed ones from community/spec authors)
-        // then they are added below. Once happy with the tests they are copied from
+        // then they are added below. Once happy with the tests they are copied manually from
         // target/compliance-kit to src/test/resources/compliance-kit as a permanent
         // test for the build
 
@@ -67,8 +67,8 @@ public class ComplianceKitTest {
                 .filename("detection-with-aircraft-registration-marking.json") //
                 .addTo(kit, tests);
         KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("Specification example B-2") //
-                .hex("9934039823D000000000000") //
+                .title("G.005 Specification Checksum example") //
+                .hex("CCB7EA73355000000000000") //
                 .filename("beacon-23-hex-id-sample.json") //
                 .addTo(kit, tests);
 
@@ -78,7 +78,7 @@ public class ComplianceKitTest {
 
     private static void writeCsv(File kit, List<KitTest> tests) {
         StringBuilder b = new StringBuilder();
-        b.append("TYPE,TITLE,HEX,JSON");
+        b.append("TYPE,TITLE,HEX,JSON\n");
         for (KitTest test : tests) {
             b.append(test.toCsvLine());
             b.append("\n");
