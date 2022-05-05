@@ -7,7 +7,11 @@ import java.util.List;
 
 import com.google.common.io.Files;
 
-public class AdhocMain {
+public final class AdhocMain {
+    
+    private AdhocMain() {
+        // prevent instantiation
+    }
 
     public static void main(String[] args) throws IOException {
         List<String> list = Files.readLines(new File("/home/dxm/temp.txt"), StandardCharsets.UTF_8);
