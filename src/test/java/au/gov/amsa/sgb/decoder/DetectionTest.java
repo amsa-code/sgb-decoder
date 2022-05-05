@@ -272,7 +272,7 @@ public class DetectionTest {
     public void testReadVesselIdAircraftOperatoAndSerialNumber() {
         // XYZ in short baudot form followed by 15 in 12 bits + 17 unused bits
         Bits b = createVesselIdAircraftOperatorAndSerialNumber();
-        AircraftOperatorAndSerialNumber a = Detection.readVesselIdAircraftOperatoAndSerialNumber(b);
+        AircraftOperatorAndSerialNumber a = Detection.readVesselIdAircraftOperatorAndSerialNumber(b);
         assertEquals("XYZ", a.aircraftOperatorDesignator());
         assertEquals(15, a.serialNumber());
     }

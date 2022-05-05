@@ -445,14 +445,14 @@ public final class Detection {
         } else if (type == 4) {
             return Optional.of(readVesselIdAviation24BitAddress(bits));
         } else if (type == 5) {
-            return Optional.of(readVesselIdAircraftOperatoAndSerialNumber(bits));
+            return Optional.of(readVesselIdAircraftOperatorAndSerialNumber(bits));
         } else {
             return Optional.empty();
         }
     }
 
     @VisibleForTesting
-    static AircraftOperatorAndSerialNumber readVesselIdAircraftOperatoAndSerialNumber(Bits bits) {
+    static AircraftOperatorAndSerialNumber readVesselIdAircraftOperatorAndSerialNumber(Bits bits) {
         String aircraftOperatorDesignator = bits.readBaudotCharactersShort(3);
         int serialNumber = bits.readUnsignedInt(12);
         bits.skip(17);
