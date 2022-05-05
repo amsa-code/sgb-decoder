@@ -189,6 +189,22 @@ If JSON or XML was used for the canonical form then it should also be described 
 
 Note that the canonical form in JSON would not have to be exactly matched as a string during a test for compliance. We don't care about whitespace outside of expressions (new lines, indents) and even field order so the match would be based on JSON equality. Every major programming language has support for this sort of equality match (either in an open-source library or in the base platform).
 
+### How to modify the Compliance Kit
+
+**Do not edit the contents of `src/test/resources/compliance-kit` directly, that is generated content!**
+
+The contents of the Compliance Kit is defined in `ComplianceKitTest.testCreateComplianceKitInTargetFolder` and looks like a number of these:
+
+```java
+KitTest
+  .type(TestType.BEACON_23_HEX_ID) //
+  .title("G.005 minimal") //
+  .hex("9977DA6D709000000000000") //
+  .filename("beacon-23-hex-id-minimal.json") //
+  .addTo(kit, tests);
+```
+When that unit test is run it creates a new folder `target/compliance-kit`. Once you are happy with the output in that folder (you've checked the json) then you copy all the files in that folder including tests.csv to the folder `src/test/resources/compliance-kit`. Once that is done then another unit test `ComplianceKit.runAllComplianceTests` will start using that new kit. Commit the changes to source control and you are done.
+
 ## Release instructions for project owner
 
 GitHub Workflow has been set up for this project. The following repository secrets are set in the settings on GitHub of this project:
