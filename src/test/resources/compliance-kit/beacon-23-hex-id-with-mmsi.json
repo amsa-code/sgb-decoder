@@ -1,0 +1,12 @@
+{
+  "countryCode" : 367,
+  "tac" : 25066,
+  "tacDescription" : "RESERVED_FUTURE_USE",
+  "serialNumber" : 9771,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "MMSI",
+    "mmsi" : 367758775,
+    "epirbMmsi" : 974751362
+  }
+}

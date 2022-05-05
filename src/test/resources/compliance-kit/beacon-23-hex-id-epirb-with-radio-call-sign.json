@@ -1,0 +1,11 @@
+{
+  "countryCode" : 316,
+  "tac" : 13242,
+  "tacDescription" : "EPIRB",
+  "serialNumber" : 5643,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "RADIO_CALL_SIGN",
+    "value" : "EI60LRC"
+  }
+}

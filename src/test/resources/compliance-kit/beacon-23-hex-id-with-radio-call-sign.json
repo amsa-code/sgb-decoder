@@ -1,0 +1,11 @@
+{
+  "countryCode" : 226,
+  "tac" : 31223,
+  "tacDescription" : "RESERVED_FUTURE_USE",
+  "serialNumber" : 23,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "RADIO_CALL_SIGN",
+    "value" : "UBYK121"
+  }
+}

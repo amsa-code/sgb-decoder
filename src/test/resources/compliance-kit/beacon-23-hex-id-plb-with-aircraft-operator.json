@@ -1,0 +1,12 @@
+{
+  "countryCode" : 211,
+  "tac" : 10239,
+  "tacDescription" : "PLB",
+  "serialNumber" : 12345,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "AIRCRAFT_OPERATOR_AND_SERIAL_NUMBER",
+    "aircraftOperatorDesignator" : "WIK",
+    "serialNumber" : 2837
+  }
+}

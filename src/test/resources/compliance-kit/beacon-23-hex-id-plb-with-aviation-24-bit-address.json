@@ -1,0 +1,11 @@
+{
+  "countryCode" : 205,
+  "tac" : 10010,
+  "tacDescription" : "PLB",
+  "serialNumber" : 13545,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "AVIATION_24_BIT_ADDRESS",
+    "addressHex" : "44914B"
+  }
+}

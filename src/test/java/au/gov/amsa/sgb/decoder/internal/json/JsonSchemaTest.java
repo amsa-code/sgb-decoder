@@ -56,7 +56,7 @@ public class JsonSchemaTest {
         JsonSchemaFactory factory = JsonSchemaFactory.byDefault();
         ObjectMapper m = new ObjectMapper();
         com.github.fge.jsonschema.main.JsonSchema jsonSchema = factory.getJsonSchema(m.readTree(file));
-        String example = TestingUtil.readResource("/compliance-kit/beacon-23-hex-id-sample.json");
+        String example = TestingUtil.readResource("/compliance-kit/beacon-23-hex-id-minimal.json");
         JsonNode json = m.readTree(example);
         ProcessingReport report = jsonSchema.validate(json);
         // System.out.println(report);

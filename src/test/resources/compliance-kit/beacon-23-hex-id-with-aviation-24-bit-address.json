@@ -1,0 +1,11 @@
+{
+  "countryCode" : 367,
+  "tac" : 41876,
+  "tacDescription" : "RESERVED_FUTURE_USE",
+  "serialNumber" : 3915,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "AVIATION_24_BIT_ADDRESS",
+    "addressHex" : "7C5D57"
+  }
+}

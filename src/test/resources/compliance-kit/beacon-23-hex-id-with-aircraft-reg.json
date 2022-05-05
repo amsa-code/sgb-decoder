@@ -1,0 +1,11 @@
+{
+  "countryCode" : 279,
+  "tac" : 39530,
+  "tacDescription" : "RESERVED_FUTURE_USE",
+  "serialNumber" : 13017,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "AIRCRAFT_REGISTRATION_MARKING",
+    "value" : "9TTENS9"
+  }
+}

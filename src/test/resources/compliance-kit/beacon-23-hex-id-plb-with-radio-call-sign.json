@@ -1,0 +1,11 @@
+{
+  "countryCode" : 316,
+  "tac" : 11568,
+  "tacDescription" : "PLB",
+  "serialNumber" : 135,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "RADIO_CALL_SIGN",
+    "value" : "ABC1245"
+  }
+}

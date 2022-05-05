@@ -1,0 +1,11 @@
+{
+  "countryCode" : 634,
+  "tac" : 13888,
+  "tacDescription" : "EPIRB",
+  "serialNumber" : 6905,
+  "testProtocolFlag" : false,
+  "vesselId" : {
+    "vesselIdType" : "AIRCRAFT_REGISTRATION_MARKING",
+    "value" : "KNJP7G"
+  }
+}
