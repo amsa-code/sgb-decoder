@@ -6,12 +6,12 @@ import static org.junit.Assert.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.ComparisonFailure;
 import org.junit.Test;
@@ -156,35 +156,42 @@ public class ComplianceKitTest {
             throw new UncheckedIOException(e);
         }
     }
-
-    private static void runAllComplianceTestsInFolder(File base) throws IOException, ComparisonFailure {
-        Charset charset = StandardCharsets.UTF_8;
+    
+    private static Stream<KitTest> kitTests(File base) throws IOException {
         File file = new File(base, "tests.csv");
-        List<String> lines = Files.readLines(file, charset);
-        lines.stream() //
+        List<String> lines = Files.readLines(file, StandardCharsets.UTF_8);
+        return lines.stream() //
                 .filter(line -> !line.startsWith("#")) //
                 .skip(1) //
                 .map(line -> line.trim()) //
                 .filter(line -> !line.isEmpty()) //
-                .forEach(line -> {
+                .map(line -> {
                     String[] items = line.split(",");
                     assertEquals(4, items.length);
-                    String type = removeQuotes(items[0]);
-                    String hex = removeQuotes(items[2]);
-                    String filename = removeQuotes(items[3]);
+                    String type = removeQuotes(items[0]).trim();
+                    String title = removeQuotes(items[1]).trim();
+                    String hex = removeQuotes(items[2]).trim();
+                    String filename = removeQuotes(items[3]).trim();
+                    return new KitTest(TestType.fromName(type), title, hex, filename);
+                });
+    }
+
+    private static void runAllComplianceTestsInFolder(File base) throws IOException, ComparisonFailure {
+        kitTests(base) //
+                .forEach(test -> {
                     String json;
                     try {
-                        json = Files.readLines(new File(base, filename), charset) //
+                        json = Files.readLines(new File(base, test.filename), StandardCharsets.UTF_8) //
                                 .stream() //
                                 .collect(Collectors.joining("\n"));
                     } catch (IOException e) {
                         throw new UncheckedIOException(e);
                     }
-                    if (type.trim().equalsIgnoreCase("Detection")) {
-                        Detection d = Detection.fromHexGroundSegmentRepresentation(hex);
+                    if (test.type.name().equalsIgnoreCase("Detection")) {
+                        Detection d = Detection.fromHexGroundSegmentRepresentation(test.hex);
                         assertJsonEquals(json, d.toJson());
                     } else {
-                        Beacon23HexId b = Beacon23HexId.fromHex(hex);
+                        Beacon23HexId b = Beacon23HexId.fromHex(test.hex);
                         assertJsonEquals(json, b.toJson());
                     }
                 });
@@ -197,6 +204,15 @@ public class ComplianceKitTest {
 
         TestType(String name) {
             this.name = name;
+        }
+        
+        static TestType fromName(String name) {
+            for (TestType t: TestType.values()) {
+                if (t.name.equals(name)) {
+                    return t;
+                }
+            }
+            throw new IllegalArgumentException("not found: " + name);
         }
 
         @Override
