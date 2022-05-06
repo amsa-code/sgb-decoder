@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,110 +34,17 @@ public class ComplianceKitTest {
 
     @Test
     public void testCreateComplianceKitInTargetFolder() throws ComparisonFailure, IOException {
-
-        // When new hex tests are obtained (confirmed ones from community/spec authors)
-        // then they are added below. Once happy with the tests they are copied manually
-        // from
-        // target/compliance-kit to src/test/resources/compliance-kit as a permanent
-        // test for the build
-
         File kit = new File("target/compliance-kit");
         kit.mkdirs();
         Arrays.stream(kit.listFiles()).forEach(File::delete);
 
-        List<KitTest> tests = new ArrayList<>();
-        KitTest.type(TestType.DETECTION) //
-                .title("Specification example B-1 no Vessel Id") //
-                .hex(DetectionTest.SAMPLE_HEX) //
-                .filename("detection-specification-example.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.DETECTION) //
-                .title("Example B-2 with Vessel Id of type MMSI") //
-                .hex(DetectionTest.createBitsWithVesselIdFieldMmsi()) //
-                .filename("detection-with-mmsi-vessel-id.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.DETECTION) //
-                .title("Example B-2 with Vessel Id Aircraft Operator and Serial Number") //
-                .hex(DetectionTest.createBitsWithVesselIdFieldAircraftOperatorAndSerialNumber()) //
-                .filename("detection-with-aircraft-operator-and-serial-number.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.DETECTION) //
-                .title("Example B-2 with Vessel Id Aircraft Registration Marking") //
-                .hex(DetectionTest.createBitsWithVesselIdFieldAircraftRegistrationMarkingVhAbc()) //
-                .filename("detection-with-aircraft-registration-marking.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 minimal") //
-                .hex("9977DA6D709000000000000") //
-                .filename("beacon-23-hex-id-minimal.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 with mmsi") //
-                .hex("ADF587AA62B157AE36DC552") //
-                .filename("beacon-23-hex-id-with-mmsi.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 with aircraft reg") //
-                .hex("A2F669AB2D930E18709B40C") //
-                .filename("beacon-23-hex-id-with-aircraft-reg.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 with aviation 24 bit address") //
-                .hex("ADF68E50F4B47C5D5700000") //
-                .filename("beacon-23-hex-id-with-aviation-24-bit-address.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 plb with aviation 24 bit address") //
-                .hex("99B49C6B4E9444914B00000") //
-                .filename("beacon-23-hex-id-plb-with-aviation-24-bit-address.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 plb with radio call sign") //
-                .hex("A794B4C00872E33B9D64A04") //
-                .filename("beacon-23-hex-id-plb-with-radio-call-sign.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 plb with aircraft operator and serial number") //
-                .hex("9A749FFF0395CB3D62BBFFF") //
-                .filename("beacon-23-hex-id-plb-with-aircraft-operator.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 epirb with radio call sign") //
-                .hex("A794CEE960B2C2C54DA6AB8") //
-                .filename("beacon-23-hex-id-epirb-with-radio-call-sign.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 with radio call sign") //
-                .hex("9C55E7DC0172F33D7E75974") //
-                .filename("beacon-23-hex-id-with-radio-call-sign.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 epirb with aircraft reg") //
-                .hex("CF54D901AF93FA6EAD72B90") //
-                .filename("beacon-23-hex-id-epirb-with-aircraft-reg.json") //
-                .addTo(kit, tests);
-        KitTest.type(TestType.BEACON_23_HEX_ID) //
-                .title("G.005 epirb") //
-                .hex("BB34CB138F5000000000000") //
-                .filename("beacon-23-hex-id-epirb.json") //
-                .addTo(kit, tests);
+        List<KitTest> tests = kitTests().collect(Collectors.toList());
 
-        writeCsv(kit, tests);
-        runAllComplianceTestsInFolder(kit);
-    }
-
-    private static void writeCsv(File kit, List<KitTest> tests) {
-        StringBuilder b = new StringBuilder();
-        b.append("TYPE,TITLE,HEX,JSON\n");
         for (KitTest test : tests) {
-            b.append(test.toCsvLine());
-            b.append("\n");
+            write(kit, test);
         }
-        try {
-            Files.write(b.toString().getBytes(StandardCharsets.UTF_8), new File(kit, "tests.csv"));
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
+        // tests should all pass
+        runAllComplianceTestsInFolder(kit);
     }
 
     private static void write(File kit, KitTest t) {
@@ -156,9 +62,9 @@ public class ComplianceKitTest {
             throw new UncheckedIOException(e);
         }
     }
-    
-    private static Stream<KitTest> kitTests(File base) throws IOException {
-        File file = new File(base, "tests.csv");
+
+    private static Stream<KitTest> kitTests() throws IOException {
+        File file = new File("src/test/resources/compliance-kit/tests.csv");
         List<String> lines = Files.readLines(file, StandardCharsets.UTF_8);
         return lines.stream() //
                 .filter(line -> !line.startsWith("#")) //
@@ -177,7 +83,7 @@ public class ComplianceKitTest {
     }
 
     private static void runAllComplianceTestsInFolder(File base) throws IOException, ComparisonFailure {
-        kitTests(base) //
+        kitTests() //
                 .forEach(test -> {
                     String json;
                     try {
@@ -205,9 +111,9 @@ public class ComplianceKitTest {
         TestType(String name) {
             this.name = name;
         }
-        
+
         static TestType fromName(String name) {
-            for (TestType t: TestType.values()) {
+            for (TestType t : TestType.values()) {
                 if (t.name.equals(name)) {
                     return t;
                 }
