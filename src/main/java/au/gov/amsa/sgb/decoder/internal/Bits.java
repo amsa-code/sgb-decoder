@@ -1,6 +1,7 @@
 package au.gov.amsa.sgb.decoder.internal;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 import com.github.davidmoten.guavamini.Preconditions;
 
@@ -91,23 +92,47 @@ public final class Bits {
 
     private static final int SHORT_BAUDOT_CODE_BINARY_LENGTH = 5;
     private static final int BAUDOT_CODE_BINARY_LENGTH = 6;
-
+    
     public String readBaudotCharactersShort(int numChars) {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < numChars; i++) {
-            int v = readUnsignedInt(SHORT_BAUDOT_CODE_BINARY_LENGTH);
-            s.append(BaudotCode.toCharFromShortCode(v));
+        return readBaudotCharactersShort(numChars, Optional.empty());
+    }
+    
+    public String readBaudotCharactersShort(int numChars, String context) {
+        return readBaudotCharactersShort(numChars, Optional.ofNullable(context));
+    }
+    
+    private String readBaudotCharactersShort(int numChars, Optional<String> context) {
+        try {
+            StringBuilder s = new StringBuilder();
+            for (int i = 0; i < numChars; i++) {
+                int v = readUnsignedInt(SHORT_BAUDOT_CODE_BINARY_LENGTH);
+                s.append(BaudotCode.toCharFromShortCode(v));
+            }
+            return s.toString();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(context.map(x -> x + ": ").orElse("") + e.getMessage(), e);
         }
-        return s.toString();
     }
 
     public String readBaudotCharacters(int numChars) {
+        return readBaudotCharacters(numChars, (String) null);
+    }
+    
+    public String readBaudotCharacters(int numChars, String context) {
+        return readBaudotCharacters(numChars, Optional.ofNullable(context));
+    }
+    
+    private String readBaudotCharacters(int numChars, Optional<String> context) {
+        try {
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < numChars; i++) {
             int v = readUnsignedInt(BAUDOT_CODE_BINARY_LENGTH);
             s.append(BaudotCode.toChar(v));
         }
         return s.toString();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(context.map(x -> x + ": ").orElse("") + e.getMessage(), e);
+        }
     }
 
     //////////////////////////////////////////////////////////////
@@ -222,4 +247,5 @@ public final class Bits {
     public String toHex() {
         return Hex.bitStringToHex(toBitString());
     }
+
 }

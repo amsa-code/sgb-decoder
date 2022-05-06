@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import au.gov.amsa.sgb.decoder.DetectionTest;
@@ -63,11 +64,33 @@ public final class BitsTest {
         Bits b = Bits.from("1100010011");
         assertEquals("AB", b.readBaudotCharactersShort(2));
     }
+    
+    @Test
+    public void testReadBaudotShortIncludesContextOnError() {
+        Bits b = Bits.from("1100011111");
+        try {
+            b.readBaudotCharactersShort(2, "context");
+            Assert.fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(e.getMessage().startsWith("context: "));
+        }
+    }
 
     @Test
     public void testReadBaudot() {
         Bits b = Bits.from("111000110011");
         assertEquals("AB", b.readBaudotCharacters(2));
+    }
+    
+    @Test
+    public void testReadBaudotIncludesContextOnError() {
+        Bits b = Bits.from("111000111111");
+        try {
+            b.readBaudotCharacters(2, "context");
+            Assert.fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(e.getMessage().startsWith("context: "));
+        }
     }
 
     @Test

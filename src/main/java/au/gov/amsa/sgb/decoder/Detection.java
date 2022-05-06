@@ -453,7 +453,7 @@ public final class Detection {
 
     @VisibleForTesting
     static AircraftOperatorAndSerialNumber readVesselIdAircraftOperatorAndSerialNumber(Bits bits) {
-        String aircraftOperatorDesignator = bits.readBaudotCharactersShort(3);
+        String aircraftOperatorDesignator = bits.readBaudotCharactersShort(3, "Aircraft Operator Designator");
         int serialNumber = bits.readUnsignedInt(12);
         bits.skip(17);
         return new AircraftOperatorAndSerialNumber(aircraftOperatorDesignator, serialNumber);
@@ -492,14 +492,14 @@ public final class Detection {
 
     @VisibleForTesting
     static RadioCallSign readVesselIdRadioCallSign(Bits bits) {
-        String s = bits.readBaudotCharacters(7).trim();
+        String s = bits.readBaudotCharacters(7, "Radio Call Sign").trim();
         bits.skip(2);
         return new RadioCallSign(s);
     }
 
     @VisibleForTesting
     static AircraftRegistrationMarking readVesselIdAicraftRegistrationMarking(Bits bits) {
-        String s = bits.readBaudotCharacters(7).trim();
+        String s = bits.readBaudotCharacters(7, "Aircraft Registration Marking").trim();
         bits.skip(2);
         return new AircraftRegistrationMarking(s);
     }
@@ -512,7 +512,7 @@ public final class Detection {
         if (b.isZero()) {
             aircraftOperatorDesignator = Optional.empty();
         } else {
-            aircraftOperatorDesignator = Optional.of(b.readBaudotCharactersShort(3));
+            aircraftOperatorDesignator = Optional.of(b.readBaudotCharactersShort(3, "Aircraft Operator Designator"));
         }
         return new Aviation24BitAddress(addressHex, aircraftOperatorDesignator);
     }
