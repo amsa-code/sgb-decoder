@@ -1,12 +1,18 @@
 package au.gov.amsa.sgb.decoder.internal;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
 import java.util.function.BinaryOperator;
@@ -42,7 +48,11 @@ public final class Tac {
     @VisibleForTesting
     static TreeMap<Integer, String> loadDescriptions(URL url) {
         try {
-            List<String> list = Files.readAllLines(Paths.get(url.toURI()), StandardCharsets.UTF_8);
+            // init FileSystem is necessary
+            URI uri = url.toURI();
+            FileSystem fs = initFileSystem(uri);
+            List<String> list = Files.readAllLines(Paths.get(uri), StandardCharsets.UTF_8);
+            fs.close();
             return list //
                     .stream() //
                     .map(line -> line.trim()) //
@@ -55,6 +65,16 @@ public final class Tac {
                             TreeMap::new));
         } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private static FileSystem initFileSystem(URI uri) throws IOException {
+        try {
+            return FileSystems.getFileSystem(uri);
+        } catch (FileSystemNotFoundException e) {
+            Map<String, String> env = new HashMap<>();
+            env.put("create", "true");
+            return FileSystems.newFileSystem(uri, env);
         }
     }
 
