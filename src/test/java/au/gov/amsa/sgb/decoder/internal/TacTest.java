@@ -3,9 +3,6 @@ package au.gov.amsa.sgb.decoder.internal;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.junit.Test;
 
 public class TacTest {
@@ -27,10 +24,12 @@ public class TacTest {
         assertEquals("RESERVED_FUTURE_USE", Tac.description(18000).get());
         assertEquals("RESERVED_SYSTEM_BEACONS", Tac.description(65535).get());
     }
-
+    
     @Test(expected = RuntimeException.class)
-    public void testLoadErrors() throws MalformedURLException {
-        Tac.loadDescriptions(new URL("http://with space"));
+    public void test() {
+        Tac.loadDescriptions(() -> {
+            throw new RuntimeException("boo");
+        });
     }
     
 }
