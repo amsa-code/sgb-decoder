@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"au.gov.amsa.sgb.decoder"},{"l":"au.gov.amsa.sgb.decoder.internal"},{"l":"au.gov.amsa.sgb.decoder.internal.json"},{"l":"au.gov.amsa.sgb.decoder.rotatingfield"},{"l":"au.gov.amsa.sgb.decoder.vesselid"}]
