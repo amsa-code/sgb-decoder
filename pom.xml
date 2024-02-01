@@ -57,8 +57,8 @@
     </developers>
 
     <scm>
-        <connection>${scm.url}</connection>
-        <developerConnection>${scm.url}</developerConnection>
+        <connection>scm:git:${scm.url}</connection>
+        <developerConnection>scm:git:${scm.url}</developerConnection>
         <url>${scm.url}</url>
     </scm>
 
