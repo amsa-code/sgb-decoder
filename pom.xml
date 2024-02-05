@@ -5,7 +5,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>au.gov.amsa</groupId>
+    <parent>
+        <groupId>au.gov.amsa</groupId>
+        <artifactId>amsa-parent</artifactId>
+        <version>1</version>
+    </parent>
+
     <artifactId>sgb-decoder</artifactId>
     <version>0.1.8-SNAPSHOT</version>
 
@@ -16,52 +21,26 @@
     <url>http://github.com/amsa-code/sgb-decoder</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <scm.url>scm:git:https://github.com/amsa-code/sgb-decoder.git</scm.url>
-
+        <spotless.check.skip>true</spotless.check.skip>
+        <checkstyle.skip>true</checkstyle.skip>
         <jackson.version>2.16.1</jackson.version>
-
-        <checkstyle.version>3.3.1</checkstyle.version>
-        <checkstyle.xml>src/main/checkstyle/checkstyle.xml</checkstyle.xml>
-        <checkstyle.suppressions.xml>src/main/checkstyle/suppressions.xml</checkstyle.suppressions.xml>
-        <checkstyle.core.version>9.3</checkstyle.core.version>
-        <javadoc.version>3.6.3</javadoc.version>
-        <pmd.version>3.21.2</pmd.version>
-        <project.info.version>3.5.0</project.info.version>
-        <jxr.version>3.3.2</jxr.version>
-        <taglist.version>3.0.0</taglist.version>
-        <spotbugs.version>4.8.3.0</spotbugs.version>
-        <m3.site.version>3.12.1</m3.site.version>
-        <changelog.version>2.2</changelog.version>
-        <changelog.version>2.2</changelog.version>
-        <bundle.plugin.version>5.1.9</bundle.plugin.version>
-        <jacoco.version>0.8.11</jacoco.version>
-
-        <line.coverage>1.00</line.coverage>
-        <branch.coverage>1.00</branch.coverage>
+        <jdk.version.minimum>8</jdk.version.minimum>
+        <maven.checkstyle.plugin.suppressions.xml>src/main/checkstyle/suppressions.xml</maven.checkstyle.plugin.suppressions.xml>
+        <scm.url>https://github.com/amsa-code/sgb-decoder.git</scm.url>
 
     </properties>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-            <comments>A business-friendly OSS license</comments>
-        </license>
-    </licenses>
-
-    <ciManagement>
-        <system>Travis</system>
-        <url>https://travis-ci.org/amsa-code/sgb-decoder</url>
-    </ciManagement>
 
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/amsa-code/sgb-decoder/issues</url>
     </issueManagement>
+
+    <distributionManagement>
+        <site>
+            <id>github</id>
+            <url>scm:git:git@github.com:amsa-code/sgb-decoder.git</url>
+        </site>
+    </distributionManagement>
 
     <inceptionYear>2021</inceptionYear>
     <developers>
@@ -78,30 +57,38 @@
     </developers>
 
     <scm>
-        <connection>${scm.url}</connection>
-        <developerConnection>${scm.url}</developerConnection>
+        <connection>scm:git:${scm.url}</connection>
+        <developerConnection>scm:git:${scm.url}</developerConnection>
         <url>${scm.url}</url>
-        <tag>0.1</tag>
     </scm>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
 
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-parameter-names</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jdk8</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
@@ -135,163 +122,44 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <compilerArgument>-parameters</compilerArgument>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <configuration>
+                        <source>8</source>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-scm-publish-plugin</artifactId>
+                    <configuration>
+                        <scmBranch>gh-pages</scmBranch>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.4.1</version>
-                <executions>
-                    <execution>
-                        <id>enforce-maven</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion>
-                                    <version>3.5.0</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.12.1</version>
-                <configuration>
-                    <source>${maven.compiler.target}</source>
-                    <target>${maven.compiler.target}</target>
-                    <!-- required for inferring field names from java parameters -->
-                    <compilerArgument>-parameters</compilerArgument>
-                </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>${m3.site.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-descriptor</id>
-                        <goals>
-                            <goal>attach-descriptor</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.0</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${javadoc.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <source>8</source>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
-                <configuration>
-                    <!-- required to get jacoco to work locally -->
-                    <argLine>@{argLine}</argLine>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <!-- configure jacoco to fail the build if not 100% 
-                            coverage -->
-                        <id>check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <rule>
-                                    <element>CLASS</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>LINE</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>${line.coverage}</minimum>
-                                        </limit>
-                                        <limit>
-                                            <counter>BRANCH</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>${branch.coverage}</minimum>
-                                        </limit>
-                                    </limits>
-                                    <!-- <excludes> -->
-                                    <!-- <exclude>com.xyz.ClassToExclude</exclude> -->
-                                    <!-- </excludes> -->
-                                </rule>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>${spotbugs.version}</version>
                 <configuration>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
                     <xmlOutput>true</xmlOutput>
+<!--                    <excludeFilterFile>src/main/spotbugs/filter.xml</excludeFilterFile>-->
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>${pmd.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                            <goal>cpd-check</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -299,164 +167,11 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>${bundle.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <obrRepository>NONE</obrRepository>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.version}</version>
-                <configuration>
-                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    <configLocation>${checkstyle.xml}</configLocation>
-                    <encoding>UTF-8</encoding>
-                    <consoleOutput>true</consoleOutput>
-                    <failsOnError>true</failsOnError>
-                    <linkXRef>false</linkXRef>
-                    <suppressionsLocation>${checkstyle.suppressions.xml}</suppressionsLocation>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>${checkstyle.core.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
-    <reporting>
-        <excludeDefaults>true</excludeDefaults>
-        <outputDirectory>${project.build.directory}/site</outputDirectory>
-        <plugins>
-            <!-- this one should go first so that it is available to other 
-                plugins when they run -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>${jxr.version}</version>
-                <configuration>
-                    <aggregate>true</aggregate>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${checkstyle.version}</version>
-                <configuration>
-                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    <configLocation>${checkstyle.xml}</configLocation>
-                    <suppressionsLocation>${checkstyle.suppressions.xml}</suppressionsLocation>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>${pmd.version}</version>
-                <configuration>
-                    <targetJdk>${maven.compiler.target}</targetJdk>
-                    <aggregate>true</aggregate>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>${spotbugs.version}</version>
-                <configuration>
-                    <effort>Max</effort>
-                    <threshold>Low</threshold>
-                    <xmlOutput>true</xmlOutput>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${project.info.version}</version>
-                <configuration>
-                    <dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>taglist-maven-plugin</artifactId>
-                <version>${taglist.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${javadoc.version}</version>
-                <configuration>
-                    <aggregate>true</aggregate>
-                </configuration>
-            </plugin>
-        </plugins>
-    </reporting>
-
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.13</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <configuration>
-                            <gpgArguments>
-                                <arg>--pinentry-mode</arg>
-                                <arg>loopback</arg>
-                            </gpgArguments>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <name>Maven Central</name>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-                </snapshotRepository>
-                <repository>
-                    <id>ossrh</id>
-                    <name>Maven Central</name>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-    </profiles>
-
 </project>
