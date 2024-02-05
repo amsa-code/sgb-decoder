@@ -1,177 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>au.gov.amsa</groupId>
-        <artifactId>amsa-parent</artifactId>
-        <version>1</version>
-    </parent>
+  <parent>
+    <groupId>au.gov.amsa</groupId>
+    <artifactId>amsa-parent</artifactId>
+    <version>1</version>
+  </parent>
 
-    <artifactId>sgb-decoder</artifactId>
-    <version>0.1.8-SNAPSHOT</version>
+  <artifactId>sgb-decoder</artifactId>
+  <version>0.1.8-SNAPSHOT</version>
+  <packaging>bundle</packaging>
 
-    <name>${project.artifactId}</name>
-    <description>Decodes second generation Beacon detection messages and Beacon 23 Hex IDs</description>
-    <packaging>bundle</packaging>
+  <name>${project.artifactId}</name>
+  <description>Decodes second generation Beacon detection messages and Beacon 23 Hex IDs</description>
 
-    <url>http://github.com/amsa-code/sgb-decoder</url>
+  <url>http://github.com/amsa-code/sgb-decoder</url>
 
-    <properties>
-        <spotless.check.skip>true</spotless.check.skip>
-        <checkstyle.skip>true</checkstyle.skip>
-        <jackson.version>2.16.1</jackson.version>
-        <jdk.version.minimum>8</jdk.version.minimum>
-        <maven.checkstyle.plugin.suppressions.xml>src/main/checkstyle/suppressions.xml</maven.checkstyle.plugin.suppressions.xml>
-        <scm.url>https://github.com/amsa-code/sgb-decoder.git</scm.url>
+  <inceptionYear>2021</inceptionYear>
+  <developers>
+    <developer>
+      <id>dave</id>
+      <name>Dave Moten</name>
+      <url>https://github.com/davidmoten/</url>
+      <roles>
+        <role>architect</role>
+        <role>developer</role>
+      </roles>
+      <timezone>+10</timezone>
+    </developer>
+  </developers>
 
-    </properties>
+  <scm>
+    <connection>scm:git:${scm.url}</connection>
+    <developerConnection>scm:git:${scm.url}</developerConnection>
+    <url>${scm.url}</url>
+  </scm>
 
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/amsa-code/sgb-decoder/issues</url>
-    </issueManagement>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/amsa-code/sgb-decoder/issues</url>
+  </issueManagement>
 
-    <distributionManagement>
-        <site>
-            <id>github</id>
-            <url>scm:git:git@github.com:amsa-code/sgb-decoder.git</url>
-        </site>
-    </distributionManagement>
+  <distributionManagement>
+    <site>
+      <id>github</id>
+      <url>scm:git:git@github.com:amsa-code/sgb-decoder.git</url>
+    </site>
+  </distributionManagement>
 
-    <inceptionYear>2021</inceptionYear>
-    <developers>
-        <developer>
-            <id>dave</id>
-            <name>Dave Moten</name>
-            <url>https://github.com/davidmoten/</url>
-            <roles>
-                <role>architect</role>
-                <role>developer</role>
-            </roles>
-            <timezone>+10</timezone>
-        </developer>
-    </developers>
+  <properties>
+    <checkstyle.skip>true</checkstyle.skip>
+    <jackson.version>2.16.1</jackson.version>
+    <jdk.version.minimum>8</jdk.version.minimum>
+    <maven.checkstyle.plugin.suppressions.xml>src/main/checkstyle/suppressions.xml</maven.checkstyle.plugin.suppressions.xml>
+    <scm.url>https://github.com/amsa-code/sgb-decoder.git</scm.url>
 
-    <scm>
-        <connection>scm:git:${scm.url}</connection>
-        <developerConnection>scm:git:${scm.url}</developerConnection>
-        <url>${scm.url}</url>
-    </scm>
+  </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.fasterxml.jackson</groupId>
-                <artifactId>jackson-bom</artifactId>
-                <version>${jackson.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
+  <dependencyManagement>
     <dependencies>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-parameter-names</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jdk8</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.davidmoten</groupId>
-            <artifactId>guava-mini</artifactId>
-            <version>0.1.7</version>
-        </dependency>
-
-        <!-- Test Dependencies -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.davidmoten</groupId>
-            <artifactId>junit-extras</artifactId>
-            <version>0.4</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.java-json-tools</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>2.2.14</version>
-            <scope>test</scope>
-        </dependency>
-
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>${jackson.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
+  </dependencyManagement>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <compilerArgument>-parameters</compilerArgument>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <configuration>
-                        <source>8</source>
-                        <additionalJOption>-Xdoclint:none</additionalJOption>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-scm-publish-plugin</artifactId>
-                    <configuration>
-                        <scmBranch>gh-pages</scmBranch>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-maven-plugin</artifactId>
-                <configuration>
-                    <xmlOutput>true</xmlOutput>
-<!--                    <excludeFilterFile>src/main/spotbugs/filter.xml</excludeFilterFile>-->
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <obrRepository>NONE</obrRepository>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+  <dependencies>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jdk8</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-parameter-names</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.davidmoten</groupId>
+      <artifactId>guava-mini</artifactId>
+      <version>0.1.7</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.davidmoten</groupId>
+      <artifactId>junit-extras</artifactId>
+      <version>0.4</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.java-json-tools</groupId>
+      <artifactId>json-schema-validator</artifactId>
+      <version>2.2.14</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Test Dependencies -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <compilerArgument>-parameters</compilerArgument>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <configuration>
+            <source>8</source>
+            <additionalJOption>-Xdoclint:none</additionalJOption>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-publish-plugin</artifactId>
+          <configuration>
+            <scmBranch>gh-pages</scmBranch>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <configuration>
+          <xmlOutput>true</xmlOutput>
+          <!--                    <excludeFilterFile>src/main/spotbugs/filter.xml</excludeFilterFile>-->
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <obrRepository>NONE</obrRepository>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
