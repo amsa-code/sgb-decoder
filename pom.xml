@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>sgb-decoder</artifactId>
-  <version>0.1.8</version>
+  <version>0.1.9-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>${project.artifactId}</name>
@@ -35,7 +35,7 @@
   <scm>
     <connection>scm:git:${scm.url}</connection>
     <developerConnection>scm:git:${scm.url}</developerConnection>
-    <tag>sgb-decoder-0.1.8</tag>
+    <tag>HEAD</tag>
     <url>${scm.url}</url>
   </scm>
 
